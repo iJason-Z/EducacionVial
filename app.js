@@ -1523,12 +1523,11 @@ function initSectionTabs() {
     if (sec) sec.classList.add('main-section');
   });
 
-  // Determine initial tab: URL hash > localStorage > default
+  // On page load/reload always start at 'aprende' so the hero is visible first.
+  // Only honour a URL hash if someone shared a direct link to a specific section.
   let initialTab = 'aprende';
-  const savedTab = localStorage.getItem('vialnic_active_tab');
   const hashTab  = window.location.hash.replace('#', '');
-  if (SECTION_TAB_IDS.includes(hashTab))   initialTab = hashTab;
-  else if (SECTION_TAB_IDS.includes(savedTab)) initialTab = savedTab;
+  if (SECTION_TAB_IDS.includes(hashTab)) initialTab = hashTab;
 
   activateTab(initialTab, false);
 

@@ -308,8 +308,11 @@ ul { list-style: none; }
   position: absolute;
   font-size: 2rem;
   bottom: 16px;
+  left: 0;
+  /* transform is composited on the GPU — smooth 60fps with no layout recalculation.
+     scaleX(-1) flips the emoji to face right; translateX drives the movement. */
   animation: carRide linear infinite;
-  transform: scaleX(-1);
+  will-change: transform;
 }
 
 /*
@@ -345,7 +348,10 @@ ul { list-style: none; }
 .car-h { bottom:  7px; font-size: 2rem;   animation-duration: 11s; animation-delay: -5.5s;   }
 .car-j { bottom:  9px; font-size: 1.9rem; animation-duration: 11s; animation-delay: -8.25s;  }
 
-@keyframes carRide { from { left: -80px; } to { left: calc(100% + 80px); } }
+@keyframes carRide {
+  from { transform: scaleX(-1) translateX(80px); }
+  to   { transform: scaleX(-1) translateX(calc(-100vw - 160px)); }
+}
 
 .semaforo-hero {
   position: absolute;
