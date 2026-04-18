@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="VialNic - Plataforma interactiva de educación vial para Nicaragua. Aprende la Ley 431, señales de tránsito y normas viales."/>
+  <title>VialNic 🚦 Educación Vial Interactiva · Nicaragua</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+  <script>if('scrollRestoration'in history)history.scrollRestoration='manual';</script>
+</head>
+<body>
+
+  <!-- ===== PANTALLA DE CARGA ===== -->
+  <div id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-light">
+        <div class="tl-dot red"></div>
+        <div class="tl-dot yellow"></div>
+        <div class="tl-dot green active"></div>
+      </div>
+      <h2>VialNic</h2>
+      <p>Cargando plataforma educativa...</p>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="global-nav" id="globalNav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">🚦 VialNic</a>
+
+      <div class="nav-xp" id="navXp">
+        <span class="nav-level" id="navLevel">Novato</span>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar-fill" id="xpFill" style="width:0%"></div>
+        </div>
+        <span class="nav-pts" id="navPts">0 XP</span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#aprende">📚 Aprende</a></li>
+        <li><a href="#quiz-section">🎯 Quiz</a></li>
+        <li><a href="#escenarios">🚗 Escenarios</a></li>
+        <li><a href="#estadisticas">📊 Estadísticas</a></li>
+        <li><a href="#logros">🏆 Logros</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero" class="hero">
+    <div class="hero-bg-road">
+      <div class="road-stripes"></div>
+      <div class="car car-a">🚗</div>
+      <div class="car car-b">🚙</div>
+      <div class="car car-c">🏍️</div>
+      <div class="car car-d">🚌</div>
+      <div class="car car-e">🚕</div>
+      <div class="car car-f">🚓</div>
+      <div class="car car-g">🚑</div>
+      <div class="car car-h">🚛</div>
+      <div class="car car-i">🚲</div>
+      <div class="car car-j">🛻</div>
+      <div class="semaforo-hero" id="semaforoHero">
+        <div class="sh-body">
+          <div class="sh-luz red" id="shRed"></div>
+          <div class="sh-luz yellow" id="shYellow"></div>
+          <div class="sh-luz green active" id="shGreen"></div>
+        </div>
+        <div class="sh-poste"></div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">🇳🇮 Managua · Nicaragua · Ley 431</div>
+      <h1>¡Aprende las Leyes<br>de <span class="highlight">Tránsito</span>!</h1>
+      <p class="hero-sub">Plataforma educativa interactiva para <strong>niños, adolescentes y adultos</strong>.<br>Aprende jugando, gana puntos y conviértete en un guardián vial.</p>
+
+      <div class="profile-selector">
+        <button class="profile-card" data-age="ninos" id="profileNinos">
+          <span class="profile-icon">👦</span>
+          <strong>Niños</strong>
+          <span>6 – 12 años</span>
+        </button>
+        <button class="profile-card" data-age="adolescentes" id="profileAdol">
+          <span class="profile-icon">🧑</span>
+          <strong>Adolescentes</strong>
+          <span>13 – 17 años</span>
+        </button>
+        <button class="profile-card" data-age="adultos" id="profileAdultos">
+          <span class="profile-icon">👨</span>
+          <strong>Adultos</strong>
+          <span>18+ años</span>
+        </button>
+      </div>
+
+      <div class="hero-cta" id="heroCta" style="display:none">
+        <p class="cta-greeting" id="ctaGreeting"></p>
+        <button id="heroStartBtn" class="btn-primary btn-lg">¡Empezar a aprender! 🚀</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== BANNER DE ALERTA ===== -->
+  <div class="alert-banner">
+    <span>⚠️</span>
+    <p>En <strong>2025</strong>, Nicaragua registró <strong>903 fallecidos</strong> y más de <strong>38,000 accidentes</strong> de tránsito.
+    El <strong>77%</strong> involucra a jóvenes con baja educación vial. <strong>¡La educación salva vidas!</strong></p>
+    <button class="banner-close" id="bannerClose">✕</button>
+  </div>
+
+  <!-- ===== MAIN CONTENT PANELS ===== -->
+  <div id="mainContent">
+
+  <!-- ===== MÓDULOS DE APRENDIZAJE ===== -->
+  <section id="aprende" class="section">
+    <div class="section-header">
+      <span class="section-badge">Módulo 1</span>
+      <h2>📚 Aprende</h2>
+      <p>Selecciona un módulo para comenzar tu aprendizaje</p>
+    </div>
+
+    <div class="modulos-tabs" id="modulosTabs">
+      <button class="tab-btn active" data-tab="senales">🚦 Señales de Tránsito</button>
+      <button class="tab-btn" data-tab="normas">📋 Normas Viales</button>
+      <button class="tab-btn" data-tab="ley431">⚖️ Ley 431</button>
+    </div>
+
+    <!-- ── TAB: SEÑALES ── -->
+    <div class="tab-content active" id="tab-senales">
+      <p class="tab-intro">Toca cada tarjeta para aprender el significado de las señales de tránsito de Nicaragua, organizadas según la <strong>Ley 431</strong>.</p>
+
+      <!-- ── GRUPO: REGLAMENTARIAS ── -->
+      <div class="senales-grupo">
+        <div class="senales-grupo-header reglamentaria-hdr">
+          <span class="grupo-icono">🛑</span>
+          <div>
+            <h3>Señales Reglamentarias</h3>
+            <p>De cumplimiento obligatorio. Su incumplimiento genera infracción según la Ley 431, Art. 48–52. (10 señales)</p>
+          </div>
+        </div>
+        <div class="senales-grid" id="senalesGrid">
+
+          <!-- 1. PARE -->
+          <div class="senal-card" data-id="1">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c0/MUTCD_R1-1.svg" alt="PARE"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-oct">PARE</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🛑 PARE</h3>
+                <p>Detente <strong>completamente</strong> antes de la línea de parada. Cede el paso a todos los vehículos y peatones. No te detengas sobre la línea.</p>
+                <span class="senal-tipo reglamentaria">Reglamentaria · Ley 431 Art. 48</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CEDA EL PASO -->
+          <div class="senal-card" data-id="2">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/5/53/SIECA_road_sign_R-1-2.svg" alt="Ceda el Paso"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-yield-fb">▽<br><small>CEDA</small></div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🔻 Ceda el Paso</h3>
+                <p>Reduce la velocidad y cede el paso a los vehículos de la vía preferencial. Si es necesario, detente completamente antes de incorporarte.</p>
+                <span class="senal-tipo reglamentaria">Reglamentaria · Ley 431 Art. 48</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. VELOCIDAD MÁXIMA 45 -->
+          <div class="senal-card" data-id="3">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/8/88/SIECA_road_sign_R-2-1.svg" alt="Velocidad máxima 45 km/h"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-speed-fb">45</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🔢 Velocidad Máxima</h3>
+                <p>Límite en zonas urbanas: <strong>45 km/h</strong>. Carretera: <strong>90 km/h</strong>. Zona escolar/hospital: <strong>25 km/h</strong>. Superar el límite es infracción grave.</p>
+                <span class="senal-tipo reglamentaria">Reglamentaria · Ley 431 Art. 119</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. NO ESTACIONAR -->
+          <div class="senal-card" data-id="4">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/0/05/SIECA_road_sign_R-8-1.svg" alt="No estacionar"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-nopark-fb"><span>P</span><div class="fb-line"></div></div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚫 No Estacionar</h3>
+                <p>Prohibido detener o estacionar el vehículo en esta zona. Aplica en todo momento. El vehículo puede ser removido y genera multa según Ley 431.</p>
+                <span class="senal-tipo prohibicion">Prohibición · Ley 431 Art. 130</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. PROHIBIDO ADELANTAR -->
+          <div class="senal-card" data-id="5">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Singapore_road_sign_-_Prohibitory_-_No_overtaking.svg" alt="Prohibido adelantar"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-nopark-fb" style="font-size:1.2rem;letter-spacing:-1px;">NO<br>↗</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚫 Prohibido Adelantar</h3>
+                <p>No está permitido rebasar ni adelantar a otro vehículo en este tramo. Zona de alto riesgo. La infracción es grave y puede causar accidentes fatales.</p>
+                <span class="senal-tipo prohibicion">Prohibición · Ley 431 Art. 126</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. PROHIBIDO GIRAR A LA IZQUIERDA -->
+          <div class="senal-card" data-id="6">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Colombia_road_sign_SR-06.svg" alt="Prohibido girar a la izquierda"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-nopark-fb" style="font-size:1.5rem;">↰🚫</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>↰ Prohibido Girar a la Izquierda</h3>
+                <p>No está permitido girar hacia la izquierda en esta intersección. Debes continuar recto o girar a la derecha. Incumplirla genera infracción.</p>
+                <span class="senal-tipo prohibicion">Prohibición · Ley 431 Art. 125</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. SENTIDO ÚNICO -->
+          <div class="senal-card" data-id="7">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/a/a6/MUTCD_R6-1R.svg" alt="Sentido único"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">➡️</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>➡️ Sentido Único</h3>
+                <p>Circula únicamente en la dirección de la flecha. Transitar en sentido contrario es una infracción muy grave que pone en peligro vidas.</p>
+                <span class="senal-tipo reglamentaria">Reglamentaria · Ley 431 Art. 120</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. PROHIBIDO EL PASO -->
+          <div class="senal-card" data-id="8">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Zeichen_267_-_Verbot_der_Einfahrt%2C_StVO_1970.svg" alt="Prohibido el paso"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-nopark-fb" style="font-size:2rem;letter-spacing:0;">⛔</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>⛔ Prohibido el Paso</h3>
+                <p>Vía de <strong>acceso restringido</strong>. Solo pueden circular los vehículos autorizados expresamente. Ignorarla es infracción muy grave con posibilidad de retención del vehículo.</p>
+                <span class="senal-tipo prohibicion">Prohibición · Ley 431 Art. 124</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. VELOCIDAD MÍNIMA -->
+          <div class="senal-card" data-id="9r">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/d/d4/SIECA_road_sign_R-2-6.svg" alt="Velocidad mínima"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-speed-fb" style="border-color:var(--blue2);color:var(--blue2);">30</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🔢 Velocidad Mínima</h3>
+                <p>Debes circular a <strong>al menos</strong> la velocidad indicada. Circular más lento obstruye el tráfico y puede causar accidentes por alcance. Común en autopistas.</p>
+                <span class="senal-tipo reglamentaria">Reglamentaria · Ley 431 Art. 119</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. PROHIBIDO GIRAR EN U -->
+          <div class="senal-card" data-id="10r">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Colombia_road_sign_SR-10.svg" alt="Prohibido girar en U"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-nopark-fb" style="font-size:1.4rem;">↩🚫</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>↩️ Prohibido Girar en U</h3>
+                <p>No está permitido realizar un giro de 180° (vuelta en U) en este tramo. Puede hacerse más adelante donde no exista esta señal. Muy común en avenidas principales de Managua.</p>
+                <span class="senal-tipo prohibicion">Prohibición · Ley 431 Art. 125</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── GRUPO: PRECAUCIÓN ── -->
+      <div class="senales-grupo">
+        <div class="senales-grupo-header precaucion-hdr">
+          <span class="grupo-icono">⚠️</span>
+          <div>
+            <h3>Señales de Precaución</h3>
+            <p>Advierten sobre condiciones peligrosas o especiales en la vía. Fondo amarillo con borde negro. Ley 431, Art. 53–58. (10 señales)</p>
+          </div>
+        </div>
+        <div class="senales-grid">
+
+          <!-- 9. ZONA ESCOLAR -->
+          <div class="senal-card" data-id="9">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/8/85/SADC_road_sign_W308_IN11.4_%28School%29.svg" alt="Zona escolar"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🏫</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🏫 Zona Escolar</h3>
+                <p>Reduce la velocidad a <strong>25 km/h</strong>. Hay niños y adolescentes cruzando. Aplica en horario escolar. Máxima atención y precaución.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 119</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. CRUCE PEATONAL -->
+          <div class="senal-card" data-id="10">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Pedestrian_crossing_warning_sign_%28Malta%29.svg" alt="Cruce peatonal"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🚶</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚶 Cruce Peatonal</h3>
+                <p>Advierte que hay un paso peatonal adelante. Reduce la velocidad y cede el paso al peatón. El peatón tiene <strong>derecho preferente</strong> de paso.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 55</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. CURVA PELIGROSA -->
+          <div class="senal-card" data-id="11">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/MUTCD_W1-2R.svg" alt="Curva peligrosa"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">↩️</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>↩️ Curva Peligrosa</h3>
+                <p>Adelante hay una curva pronunciada. Reduce la velocidad antes de entrar, mantén tu carril y no adelantes. Las curvas son causa frecuente de accidentes en Nicaragua.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 53</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. CRUCE DE FERROCARRIL -->
+          <div class="senal-card" data-id="12">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/SIECA_road_sign_P-5-1.svg" alt="Cruce de ferrocarril"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🚂</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚂 Cruce de Ferrocarril</h3>
+                <p><strong>Detente completamente</strong> y verifica que no venga un tren en ningún sentido antes de cruzar. Los trenes no pueden frenar rápidamente. Obligatorio por Ley 431.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 57</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. ANIMALES EN LA VÍA -->
+          <div class="senal-card" data-id="13">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Colombia_road_sign_SP-49_%28cattle%29.svg" alt="Animales en la vía"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🐄</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🐄 Animales en la Vía</h3>
+                <p>Es posible encontrar ganado u otros animales cruzando la carretera. Reduce la velocidad y prepárate para detenerte. Muy frecuente en zonas rurales de Nicaragua.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 53</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. SUPERFICIE RESBALADIZA -->
+          <div class="senal-card" data-id="14">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/d/d5/MUTCD_W8-5.svg" alt="Superficie resbaladiza"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🌧️</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🌧️ Superficie Resbaladiza</h3>
+                <p>La calzada puede estar mojada o con material suelto. Reduce la velocidad y aumenta la distancia de seguridad. Evita frenadas bruscas en esta zona.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 53</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. OBRAS EN LA VÍA -->
+          <div class="senal-card" data-id="15">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Zeichen_123_-_Baustelle%2C_StVO_1992.svg" alt="Obras en la vía"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🚧</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚧 Obras en la Vía</h3>
+                <p>Hay trabajadores y maquinaria en la carretera. Reduce la velocidad drásticamente, sigue las indicaciones del personal de tránsito y no intentes adelantar.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 56</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16. PUENTE ANGOSTO -->
+          <div class="senal-card" data-id="16p">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/6/68/MUTCD_W5-2.svg" alt="Puente angosto"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🌉</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🌉 Puente Angosto</h3>
+                <p>El puente o vía tiene un <strong>ancho reducido</strong>. Cede el paso al vehículo que ya está sobre el puente. Avanza con precaución y a baja velocidad. Frecuente en zonas rurales.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 53</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17. SEMÁFORO ADELANTE -->
+          <div class="senal-card" data-id="17p">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/c/c0/Colombia_road_sign_SP-23.svg" alt="Semáforo adelante"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">🚦</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚦 Semáforo Adelante</h3>
+                <p>Avisa que hay un semáforo próximo, especialmente en zonas de baja visibilidad o intersecciones inesperadas. Reduce la velocidad para poder reaccionar a tiempo ante el cambio de luz.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 53</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 18. PENDIENTE PRONUNCIADA -->
+          <div class="senal-card" data-id="18p">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f0/MUTCD_W7-1.svg" alt="Pendiente pronunciada"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-warn-fb">⛰️</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>⛰️ Pendiente Pronunciada</h3>
+                <p>La vía tiene una <strong>bajada o subida empinada</strong>. En bajada: reduce la velocidad antes de llegar y usa freno motor para no sobrecalentar frenos. En subida: mantén velocidad y carril.</p>
+                <span class="senal-tipo precaucion">Precaución · Ley 431 Art. 53</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── GRUPO: INFORMATIVAS ── -->
+      <div class="senales-grupo">
+        <div class="senales-grupo-header informativa-hdr">
+          <span class="grupo-icono">ℹ️</span>
+          <div>
+            <h3>Señales Informativas</h3>
+            <p>Orientan al conductor sobre rutas, servicios y puntos de interés. Fondo azul o verde. Ley 431, Art. 59–63. (7 señales)</p>
+          </div>
+        </div>
+        <div class="senales-grid">
+
+          <!-- 16. ZONA HOSPITALARIA -->
+          <div class="senal-card" data-id="16">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Colombia_road_sign_SI-16.svg" alt="Zona hospitalaria"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">🏥</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🏥 Zona Hospitalaria</h3>
+                <p>Límite de velocidad: <strong>25 km/h</strong>. Prohibido usar la bocina. Los pacientes necesitan silencio. Esta zona también aplica restricciones de estacionamiento.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 119</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17. ESTACIONAMIENTO PERMITIDO -->
+          <div class="senal-card" data-id="17">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/8/80/Zeichen_314-50_-_Parkplatz%2C_StVO_2013.svg" alt="Estacionamiento permitido"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb" style="font-size:2.2rem;font-weight:900;">P</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🅿️ Estacionamiento</h3>
+                <p>Indica que está permitido estacionar en esta zona. Respeta las condiciones indicadas (horario, tipo de vehículo). El estacionamiento indebido genera multa.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 130</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 18. PRIMEROS AUXILIOS -->
+          <div class="senal-card" data-id="18">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/ISO_7010_E003_-_First_aid_sign.svg" alt="Primeros auxilios"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">🚑</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚑 Primeros Auxilios</h3>
+                <p>Indica la ubicación de un puesto de primeros auxilios o servicios de emergencia. En caso de accidente, llama al <strong>118</strong> o acude a este punto.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 60</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 19. GASOLINERA -->
+          <div class="senal-card" data-id="19">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Chile_IS-11.svg" alt="Gasolinera"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">⛽</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>⛽ Gasolinera</h3>
+                <p>Indica la proximidad de una estación de combustible. Útil en carreteras largas para planificar paradas. En Nicaragua las gasolineras también venden lubricantes y aire.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 59</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 20. DESVÍO / RUTA ALTERNA -->
+          <div class="senal-card" data-id="20">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/MUTCD_M4-8a.svg" alt="Desvío - ruta alterna"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">🔀</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🔀 Desvío / Ruta Alterna</h3>
+                <p>Indica una ruta alternativa, generalmente por obras o cierre de vía. Sigue las flechas de desvío y no ignores esta señal. Las autoridades de tránsito la colocan obligatoriamente.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 62</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 21. ÁREA DE DESCANSO -->
+          <div class="senal-card" data-id="21">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/d/d7/RU_road_sign_7.11.svg" alt="Área de descanso"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">🛖</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🛖 Área de Descanso</h3>
+                <p>Próxima área donde puedes detenerte a descansar, comer o usar servicios. La fatiga es causa de accidentes. Si llevas más de 2 horas manejando, <strong>para y descansa</strong>.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 59</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 22. CRUCE DE CICLISTAS -->
+          <div class="senal-card" data-id="22">
+            <div class="senal-card-inner">
+              <div class="senal-front">
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Zeichen_237_-_Sonderweg_Radfahrer%2C_StVO_1992.svg" alt="Ruta de ciclistas"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="sign-fallback sign-info-fb">🚲</div>
+                <p class="tap-hint">👆 Toca para ver</p>
+              </div>
+              <div class="senal-back">
+                <h3>🚲 Ruta / Carril de Ciclistas</h3>
+                <p>Indica un carril o zona designada para ciclistas. Los vehículos <strong>no pueden invadir</strong> este espacio. En Nicaragua los ciclistas tienen protección especial bajo la Ley 431.</p>
+                <span class="senal-tipo informativa">Informativa · Ley 431 Art. 63</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="btn-primary complete-module" data-module="senales" id="completeSenal">
+        ✅ Completé este módulo (+50 XP)
+      </button>
+      <div class="modulo-nav">
+        <button class="btn-modulo-next" data-next-tab="normas">📋 Siguiente: Normas Viales →</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: NORMAS ── -->
+    <div class="tab-content" id="tab-normas">
+      <p class="tab-intro">Conoce las normas básicas que todo ciudadano nicaragüense debe cumplir al circular en las vías públicas, según la <strong>Ley 431</strong> y sus reglamentos.</p>
+
+      <!-- Tarjetas de resumen rápido -->
+      <div class="normas-resumen-grid">
+        <div class="norma-resumen-card">
+          <span class="nr-icon">🚗</span>
+          <div><strong>45 km/h</strong><small>Zona urbana</small></div>
+        </div>
+        <div class="norma-resumen-card">
+          <span class="nr-icon">🛣️</span>
+          <div><strong>90 km/h</strong><small>Carretera</small></div>
+        </div>
+        <div class="norma-resumen-card">
+          <span class="nr-icon">🍺</span>
+          <div><strong>0.0 g/L</strong><small>Alcohol tolerado</small></div>
+        </div>
+        <div class="norma-resumen-card">
+          <span class="nr-icon">📏</span>
+          <div><strong>2 seg.</strong><small>Distancia mínima</small></div>
+        </div>
+        <div class="norma-resumen-card">
+          <span class="nr-icon">🆘</span>
+          <div><strong>118</strong><small>Emergencias</small></div>
+        </div>
+        <div class="norma-resumen-card">
+          <span class="nr-icon">👮</span>
+          <div><strong>101</strong><small>Policía Nacional</small></div>
+        </div>
+      </div>
+
+      <div class="accordion" id="accordionNormas">
+
+        <!-- PEATONES -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚶 Normas para Peatones
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">El peatón es el usuario más vulnerable de la vía pública. La Ley 431 (Arts. 131–140) reconoce sus derechos pero también establece obligaciones para protegerlos.</div>
+            <ul class="normas-list">
+              <li>✅ Camina siempre por la <strong>acera o banqueta</strong>. Si no existe, hazlo por el lado izquierdo enfrentando el tráfico.</li>
+              <li>✅ Cruza la calle <strong>únicamente por los pasos peatonales</strong> (cebras) o en esquinas señalizadas.</li>
+              <li>✅ Mira a <strong>ambos lados</strong> antes de cruzar, aunque tengas luz verde peatonal o derecho de paso.</li>
+              <li>✅ Usa <strong>ropa reflectante o colores claros</strong> si caminas en zonas de poca iluminación o de noche.</li>
+              <li>✅ Respeta las señales del semáforo peatonal: rojo = espera, verde = cruza con precaución.</li>
+              <li>✅ Al cruzar, hazlo en <strong>línea recta y sin detenerte</strong> para que los conductores puedan anticipar tu trayectoria.</li>
+              <li>❌ Nunca cruces mirando el <strong>celular o con audífonos</strong>; pierdes capacidad de percibir el entorno.</li>
+              <li>❌ No cruces entre vehículos estacionados ni en medio de la cuadra fuera de pasos señalizados.</li>
+              <li>❌ No confíes ciegamente en la luz verde: verifica que los vehículos se estén deteniendo antes de avanzar.</li>
+              <li>⚠️ En Nicaragua el <strong>31% de los fallecidos</strong> en accidentes son peatones. La precaución salva vidas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CONDUCTORES -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚗 Normas para Conductores
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">El conductor es el principal responsable de la seguridad en la vía. La Ley 431 establece obligaciones claras y sanciones severas por su incumplimiento.</div>
+            <ul class="normas-list">
+              <li>✅ Porta siempre tu <strong>licencia de conducir vigente</strong>, tarjeta de circulación y seguro obligatorio (SOA).</li>
+              <li>✅ <strong>Cinturón de seguridad</strong> obligatorio para conductor y todos los pasajeros, en todo tipo de vía (Art. 93).</li>
+              <li>✅ Respeta los límites de velocidad: <strong>45 km/h calles/avenidas, 60 km/h pistas, 100 km/h carretera, 25 km/h zonas escolares</strong>.</li>
+              <li>✅ Mantén <strong>distancia mínima de 2 segundos</strong> respecto al vehículo de adelante (más en lluvia o noche).</li>
+              <li>✅ <strong>Cede el paso al vehículo de la derecha</strong> en intersecciones sin señalización (regla de preferencia).</li>
+              <li>✅ Señaliza con antelación antes de <strong>girar, cambiar de carril o frenar</strong> abruptamente.</li>
+              <li>✅ Mantén el vehículo en <strong>buenas condiciones mecánicas</strong>: frenos, luces, llantas y dirección operativos.</li>
+              <li>✅ Al estacionar, deja el vehículo en zonas permitidas, con freno de mano activado y ruedas orientadas hacia la acera.</li>
+              <li>❌ <strong>Prohibido absolutamente</strong> manejar bajo efectos del alcohol o drogas. Tolerancia: 0.0 g/L (Art. 103).</li>
+              <li>❌ No uses el <strong>celular sin manos libres</strong> al conducir. Es infracción grave (Art. 87).</li>
+              <li>❌ No manejes con <strong>sueño o fatiga extrema</strong>. Detente en un lugar seguro y descansa.</li>
+              <li>❌ No transites en <strong>sentido contrario</strong> al tráfico ni en carriles exclusivos no autorizados.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MOTOCICLISTAS -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🏍️ Normas para Motociclistas
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Los motociclistas representan el <strong>55.9% de las víctimas</strong> de accidentes en Nicaragua. Son el grupo más vulnerable por su exposición directa y menor protección física.</div>
+            <ul class="normas-list">
+              <li>✅ Usa <strong>casco homologado</strong> siempre, tanto conductor como pasajero. Es obligatorio por el Art. 94 de la Ley 431.</li>
+              <li>✅ Usa <strong>chaleco reflectante</strong> en horario nocturno o con visibilidad reducida.</li>
+              <li>✅ Respeta el límite de velocidad: <strong>45 km/h en ciudad</strong>, 90 km/h en carretera.</li>
+              <li>✅ <strong>No lleves más de un pasajero</strong> en la motocicleta. Sobrecargar la moto afecta el equilibrio y el frenado.</li>
+              <li>✅ Circula siempre dentro de tu <strong>carril asignado</strong>. No te desplaces entre carriles (zigzag).</li>
+              <li>✅ Mantén <strong>ambas manos en el manillar</strong> en todo momento mientras circulas.</li>
+              <li>✅ Enciende siempre la <strong>luz delantera</strong>, incluso de día, para ser más visible.</li>
+              <li>✅ Usa <strong>guantes, botas y ropa de protección</strong> siempre que sea posible.</li>
+              <li>❌ No adelantes por la derecha entre carriles (<strong>colarse</strong>). Es peligroso e ilegal.</li>
+              <li>❌ No uses el celular ni audífonos mientras conduces la motocicleta.</li>
+              <li>❌ No te aferres a camiones u otros vehículos para impulso. Es extremadamente peligroso.</li>
+              <li>⚠️ En Nicaragua, un accidente de moto <strong>sin casco</strong> incrementa el riesgo de muerte en un 40%.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CICLISTAS -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚲 Normas para Ciclistas
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">La bicicleta es un medio de transporte legal y sostenible. Los ciclistas deben respetar las mismas señales de tránsito que los vehículos motorizados.</div>
+            <ul class="normas-list">
+              <li>✅ Circula por el <strong>carril derecho</strong> o por las ciclovías habilitadas cuando estén disponibles.</li>
+              <li>✅ Usa <strong>casco protector</strong> y chaleco reflectante, especialmente de noche.</li>
+              <li>✅ <strong>Señaliza con el brazo</strong> antes de girar a la izquierda (brazo extendido) o a la derecha (brazo doblado hacia arriba).</li>
+              <li>✅ Instala <strong>luces delantera (blanca) y trasera (roja)</strong> para circular de noche o con poca visibilidad.</li>
+              <li>✅ Respeta todos los semáforos, señales de PARE y pasos peatonales igual que cualquier otro vehículo.</li>
+              <li>✅ Al cruzar intersecciones peligrosas, <strong>desmonta y cruza como peatón</strong> por el paso cebra.</li>
+              <li>✅ Mantén tu bicicleta en buen estado: frenos, llantas y luces funcionando correctamente.</li>
+              <li>❌ No circules en <strong>sentido contrario</strong> al tráfico. Aunque parezca seguro, es muy peligroso.</li>
+              <li>❌ No te aferres a vehículos en movimiento para dejarte arrastrar.</li>
+              <li>❌ No circules en <strong>aceras o andenes peatonales</strong> salvo que esté explícitamente permitido.</li>
+              <li>❌ No uses el celular ni audífonos mientras pedaleas.</li>
+              <li>⚠️ Sé especialmente visible: usa ropa de colores brillantes y evita los ángulos ciegos de camiones y buses.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- TRANSPORTE PÚBLICO -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚌 Normas en el Transporte Público
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Como pasajero del transporte público también tienes derechos y responsabilidades. Conocerlos contribuye a la seguridad de todos los usuarios.</div>
+            <ul class="normas-list">
+              <li>✅ Aborda y desciende <strong>únicamente en las paradas autorizadas</strong>, no entre calles.</li>
+              <li>✅ Espera en la acera, <strong>detrás de la línea de seguridad</strong>, mientras el bus se detiene completamente.</li>
+              <li>✅ Cede el asiento a <strong>adultos mayores, personas con discapacidad, mujeres embarazadas y niños</strong>.</li>
+              <li>✅ Usa el cinturón de seguridad si el asiento lo tiene disponible.</li>
+              <li>✅ Mantén tus pertenencias <strong>fuera del pasillo</strong> para evitar accidentes dentro del vehículo.</li>
+              <li>❌ No distraigas al conductor hablándole durante la marcha.</li>
+              <li>❌ No transportes objetos peligrosos, inflamables o de gran tamaño sin autorización.</li>
+              <li>❌ No subas ni bajes del bus <strong>en movimiento</strong>, aunque vaya lento.</li>
+              <li>⚠️ Si el conductor maneja de forma temeraria, tienes derecho a exigir que se detenga o a reportarlo al 101.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CONDUCCIÓN NOCTURNA -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🌙 Conducción Nocturna y Lluvia
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">El <strong>62.4%</strong> de los accidentes en Nicaragua ocurren en horario vespertino y nocturno. La reducción de visibilidad y el cansancio son factores determinantes.</div>
+            <ul class="normas-list">
+              <li>✅ Usa siempre las <strong>luces bajas (cortas)</strong> en zonas urbanas de noche.</li>
+              <li>✅ Usa las <strong>luces altas (largas)</strong> solo en carretera sin alumbrado y sin vehículos en sentido contrario.</li>
+              <li>✅ Reduce la velocidad al menos un <strong>20% respecto al límite</strong> normal cuando hay lluvia o neblina.</li>
+              <li>✅ <strong>Aumenta la distancia de seguridad</strong> a al menos 4 segundos con el vehículo de adelante.</li>
+              <li>✅ Si hay lluvia intensa y la visibilidad es casi nula, <strong>detente en un lugar seguro</strong> y espera.</li>
+              <li>✅ Revisa el funcionamiento de los <strong>limpiaparabrisas</strong> antes de salir con lluvia.</li>
+              <li>✅ Activa las <strong>luces de emergencia</strong> si debes detenerte en la carretera por desperfectos.</li>
+              <li>❌ No uses luces altas cuando haya vehículos circulando en sentido contrario: los deslumbras.</li>
+              <li>❌ No manejes con sueño o fatiga. Detente, descansa mínimo <strong>20 minutos</strong> antes de continuar.</li>
+              <li>❌ No frenes de golpe sobre superficies mojadas o con piedras sueltas; puedes perder el control.</li>
+              <li>⚠️ Los sábados, domingos y lunes concentran el <strong>58.5%</strong> de accidentes. Extrema precaución en fines de semana.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- USO DEL CELULAR Y DISTRACCIONES -->
+        <div class="acc-item">
+          <button class="acc-header">
+            📱 Distracciones al Conducir
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Las distracciones al volante son una causa creciente de accidentes. El celular es la principal, pero no la única. Un segundo de distracción a 45 km/h equivale a recorrer 12.5 metros sin ver la vía.</div>
+            <ul class="normas-list">
+              <li>✅ Si necesitas usar el teléfono, <strong>detente en un lugar seguro</strong> antes de hacerlo.</li>
+              <li>✅ Usa solo dispositivos de <strong>manos libres (bluetooth, auricular)</strong> si debes recibir una llamada urgente.</li>
+              <li>✅ Configura el <strong>GPS antes de salir</strong>, no mientras manejas.</li>
+              <li>✅ Si viajas acompañado, pide al pasajero que maneje el teléfono o la música.</li>
+              <li>❌ No escribas ni leas <strong>mensajes de texto, WhatsApp o redes sociales</strong> al volante. Es infracción grave (Art. 87).</li>
+              <li>❌ No comas, bebas ni te maquilles mientras conduces.</li>
+              <li>❌ No te distraigas viendo <strong>accidentes, negocios o personas</strong> al costado de la vía.</li>
+              <li>❌ No pongas la música a un volumen tan alto que te impida <strong>escuchar sirenas de emergencia</strong>.</li>
+              <li>⚠️ El uso del celular al volante <strong>cuadruplica el riesgo</strong> de tener un accidente.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SEÑALES DE TRÁNSITO -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚦 Cómo Usar los Semáforos y Señales
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Conocer e interpretar correctamente las señales de tránsito y los semáforos es esencial para la seguridad. Ignorarlos es una de las principales causas de accidentes.</div>
+            <ul class="normas-list">
+              <li>🔴 <strong>Luz ROJA:</strong> Detente completamente antes de la línea blanca. No puedes avanzar por ningún motivo.</li>
+              <li>🟡 <strong>Luz ÁMBAR:</strong> Prepárate para detenerte. Solo continúas si ya estás tan cerca que frenar sería peligroso.</li>
+              <li>🟢 <strong>Luz VERDE:</strong> Puedes avanzar con precaución. Verifica que no haya peatones o vehículos cruzando.</li>
+              <li>🛑 <strong>Señal PARE (octágono rojo):</strong> Detención total obligatoria aunque no haya tráfico visible.</li>
+              <li>🔻 <strong>Señal CEDA (triángulo rojo):</strong> Reduce velocidad y da prioridad a quien circula por la vía principal.</li>
+              <li>⚠️ <strong>Señales amarillas:</strong> Advierten de peligros: curvas, cruces, animales, obras. Reduce velocidad.</li>
+              <li>🔵 <strong>Señales azules:</strong> Son informativas: rutas, servicios, estacionamientos, hospitales.</li>
+              <li>✅ Las señales horizontales en el pavimento (líneas, flechas, cebras) también son <strong>obligatorias</strong>.</li>
+              <li>❌ Nunca ignores una señal aunque creas que la vía está despejada.</li>
+              <li>⚠️ Respetar las señales no es opcional: su incumplimiento genera <strong>multas e infracciones</strong> según la Ley 431.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- EN CASO DE ACCIDENTE -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🆘 En Caso de Accidente de Tránsito
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Saber cómo actuar en los primeros minutos tras un accidente puede <strong>salvar vidas</strong>. La Ley 431 (Art. 150) obliga a todos los involucrados a actuar de forma responsable.</div>
+            <ul class="normas-list">
+              <li>✅ <strong>Mantén la calma</strong> y evalúa la situación antes de actuar. El pánico empeora las cosas.</li>
+              <li>✅ <strong>Activa las luces de emergencia</strong> del vehículo y coloca los triángulos reflectantes a 50 metros del accidente.</li>
+              <li>✅ Llama inmediatamente al <strong>118 (emergencias)</strong>, al <strong>101 (Policía Nacional)</strong> o al <strong>115 (Bomberos)</strong>.</li>
+              <li>✅ Si hay heridos, <strong>no los muevas</strong> salvo que haya riesgo inminente de incendio o explosión.</li>
+              <li>✅ Si sabes primeros auxilios, ayuda a los heridos manteniendo sus vías respiratorias abiertas.</li>
+              <li>✅ <strong>Identifícate</strong> ante la otra parte y las autoridades. Anota los datos del otro conductor, testigos y placas.</li>
+              <li>✅ Toma <strong>fotografías del lugar</strong> del accidente, daños y posición de los vehículos antes de moverlos (si es seguro).</li>
+              <li>✅ Espera a las autoridades para rendir tu <strong>declaración de los hechos</strong>.</li>
+              <li>❌ <strong>Nunca huyas</strong> del lugar del accidente. Es un delito grave según el Art. 150 de la Ley 431 y puede resultar en prisión.</li>
+              <li>❌ No muevas los vehículos de su posición original hasta que llegue la Policía, salvo que obstaculicen el tráfico y no haya heridos.</li>
+              <li>❌ No discutas ni te pelees con el otro conductor. Actúa con serenidad y respeto.</li>
+              <li>⚠️ Números de emergencia: <strong>118</strong> Emergencias · <strong>101</strong> Policía · <strong>115</strong> Bomberos · <strong>128</strong> Cruz Roja</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- MANTENIMIENTO DEL VEHÍCULO -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🔧 Mantenimiento y Revisión del Vehículo
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Un vehículo en mal estado es una causa directa de accidentes. La Ley 431 exige condiciones mínimas de seguridad mecánica para circular en vías públicas.</div>
+            <ul class="normas-list">
+              <li>✅ Verifica periódicamente el estado de los <strong>frenos</strong>. Son el sistema de seguridad más crítico.</li>
+              <li>✅ Revisa la <strong>presión y estado de las llantas</strong> mensualmente. Una llanta desinflada puede causar pérdida de control.</li>
+              <li>✅ Comprueba que todas las <strong>luces funcionan</strong>: delantera, trasera, frenos, direccionales y reversa.</li>
+              <li>✅ Mantén el <strong>nivel de aceite, agua y líquido de frenos</strong> dentro de los rangos recomendados.</li>
+              <li>✅ Realiza la <strong>revisión técnica vehicular</strong> en los plazos establecidos por las autoridades.</li>
+              <li>✅ El <strong>cinturón de seguridad</strong> debe estar en perfecto estado. Un cinturón dañado no protege.</li>
+              <li>✅ Mantén el <strong>parabrisas limpio y sin grietas</strong> que afecten la visibilidad.</li>
+              <li>✅ Lleva siempre en el vehículo: <strong>extintor, botiquín, triángulos reflectantes y cable de corriente</strong>.</li>
+              <li>❌ No circules con luces fundidas, espejos rotos o frenos en mal estado. Es infracción y pone en riesgo tu vida.</li>
+              <li>❌ No sobrecargas el vehículo más allá de su <strong>capacidad máxima</strong> de carga.</li>
+              <li>⚠️ El <strong>10% de los accidentes</strong> en Nicaragua tienen causas mecánicas prevenibles con mantenimiento regular.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- AVENTAJAMIENTO -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚦 Reglas de Aventajamiento (Adelantamiento)
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Adelantar incorrectamente es una de las principales causas de accidentes mortales. La Ley 431 regula cuándo, cómo y dónde está permitido aventajar.</div>
+            <ul class="normas-list">
+              <li>✅ Aventaja siempre por el <strong>carril izquierdo</strong>. Esa es la forma normal de adelantar.</li>
+              <li>✅ Antes de aventajar: verifica que el vehículo de atrás <strong>no vaya a hacer la misma maniobra</strong>.</li>
+              <li>✅ Señaliza con el <strong>pide vía (amarillo)</strong> antes de cambiar de carril para adelantar.</li>
+              <li>✅ Puedes aventajar por la derecha <strong>únicamente</strong> cuando el vehículo de adelante esté completamente inmovilizado.</li>
+              <li>✅ Si un vehículo lento en carretera se hace a un lado, puedes adelantarlo aunque haya línea continua.</li>
+              <li>❌ <strong>Nunca</strong> adelantes en: <strong>pendientes, curvas, puentes, intersecciones o pasos a desnivel</strong>.</li>
+              <li>❌ <strong>Nunca</strong> adelantes sobre línea amarilla continua: invades el carril contrario y es peligro de choque frontal.</li>
+              <li>❌ No adelantes cuando la velocidad exceda el 30% del límite — eso es conducción temeraria (Art. 26 bis).</li>
+              <li>⚠️ En pendientes: la ley lo prohíbe porque no hay visibilidad del carril contrario.</li>
+              <li>⚠️ En puentes: prohibido por reducción del espacio y la ley lo prohíbe expresamente.</li>
+              <li>⚠️ En curvas: prohibido por falta de visibilidad y riesgo de choque frontal.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- LUCES Y PREFERENCIA -->
+        <div class="acc-item">
+          <button class="acc-header">
+            💡 Sistema de Luces del Vehículo
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">El uso correcto de las luces es una obligación legal. Las luces salvan vidas al hacer el vehículo visible para los demás. La Ley 431 establece colores, horarios y condiciones de uso.</div>
+            <ul class="normas-list">
+              <li>💡 <strong>Luces bajas (cortas):</strong> Obligatorias en zonas urbanas de noche. Son de color <strong>blanco o amarillo</strong>.</li>
+              <li>💡 <strong>Luces altas (largas):</strong> Solo en carretera sin alumbrado y <strong>sin vehículos en sentido contrario</strong>. Nunca en poblados ni al cruzar con otro conductor.</li>
+              <li>🟡 <strong>Luces de pide vía (direccionales):</strong> De color <strong>amarillo</strong>. Úsalas antes de girar, cambiar de carril o incorporarte al tráfico.</li>
+              <li>🕕 <strong>Horario obligatorio:</strong> Enciende las luces entre las <strong>6 de la tarde y las 6 de la mañana</strong>.</li>
+              <li>✅ También son obligatorias con: <strong>lluvia, humo, polvo</strong> o cualquier condición meteorológica adversa.</li>
+              <li>✅ Obligatorias al circular en <strong>carril contrario autorizado excepcionalmente</strong>.</li>
+              <li>❌ No uses luces altas cuando vengan vehículos en sentido contrario: los deslumbras y causas accidente.</li>
+              <li>❌ No uses luces altas al circular por poblados aunque sea de noche.</li>
+              <li>⚠️ Si debes detenerte en carretera por desperfecto: activa las <strong>luces de emergencia (hazard)</strong> y coloca triángulos a <strong>~10 metros</strong> en zona urbana.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PREFERENCIA DE PASO -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🔱 Preferencia de Paso y Maniobras
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Saber a quién ceder el paso evita colisiones en intersecciones. La Ley 431 establece una jerarquía clara: agente de tránsito > semáforo > señal de PARE > reglas generales.</div>
+            <ul class="normas-list">
+              <li>👮 La <strong>señal que prevalece</strong> en toda intersección es el <strong>agente de tránsito</strong>. Obedécele sobre cualquier semáforo o señal.</li>
+              <li>🔱 En intersección sin señales: tiene preferencia el vehículo que <strong>continúa en la vía por la que circula</strong>, sobre quien va a ingresar.</li>
+              <li>↪️ Cuando dos vehículos en sentido contrario van a tomar la misma vía: tiene preferencia <strong>el que gira a la derecha</strong>.</li>
+              <li>⬆️ En una pendiente estrecha: tiene preferencia <strong>el vehículo que va subiendo</strong>.</li>
+              <li>↩️ En sitio estrecho: tiene preferencia <strong>el que entró primero</strong>.</li>
+              <li>🚸 El peatón tiene preferencia cuando cruza en <strong>paso peatonal señalizado</strong>, con semáforo verde peatonal, o cuando el agente lo indica.</li>
+              <li>🔴 Puedes girar a la derecha con semáforo en rojo <strong>solo si está autorizado por señal o agente</strong>.</li>
+              <li>🔄 En <strong>rotondas:</strong> velocidad máxima 30 km/h. Prohibido cambiar de carril, estacionarse o retroceder.</li>
+              <li>⏪ La <strong>marcha en reversa</strong> solo está permitida para: ingresar a garajes y maniobras de parqueo/estacionamiento.</li>
+              <li>❌ No entres a una intersección con luz verde si <strong>prevés que no llegarás al otro lado</strong>: obstruyes la circulación transversal.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RÉGIMEN PREFERENTE -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🚨 Vehículos de Régimen Preferente
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Ciertos vehículos tienen prioridad absoluta de circulación según la Ley 431. Conocer cómo actuar ante ellos puede evitar accidentes y sanciones.</div>
+            <ul class="normas-list">
+              <li>🚨 <strong>Vehículos de régimen preferente:</strong> Caravanas presidenciales, militares y de gobierno · Cruz Roja · Auto-patrullas de la Policía Nacional.</li>
+              <li>✅ Cuando se aproxime un vehículo preferente en el <strong>mismo sentido</strong>: conduce lo más a la <strong>izquierda o a la derecha</strong> posible para despejar la vía.</li>
+              <li>✅ Hazte a un lado y <strong>cédele el paso completamente</strong>. Espera a que pase antes de reincorporarte.</li>
+              <li>❌ <strong>No frenes bruscamente</strong> al escuchar la sirena: puede causar colisión por detrás.</li>
+              <li>❌ <strong>No sigas al vehículo preferente</strong> para aprovechar el paso libre. Es infracción y peligroso.</li>
+              <li>⚠️ Las ambulancias, bomberos y policía tienen sirena y luces de emergencia. Respétalos siempre, aunque tengas semáforo en verde.</li>
+              <li>📞 Números de emergencia: <strong>118</strong> Emergencias · <strong>101</strong> Policía Nacional · <strong>115</strong> Bomberos · <strong>128</strong> Cruz Roja</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- NIÑOS Y SEGURIDAD INFANTIL -->
+        <div class="acc-item">
+          <button class="acc-header">
+            👶 Seguridad Infantil en el Vehículo
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">La Ley 431 establece normas específicas para el transporte de menores. El incumplimiento pone en riesgo la vida de los niños y genera infracciones graves.</div>
+            <ul class="normas-list">
+              <li>🪑 Los niños <strong>menores de 7 años</strong> deben viajar en <strong>sillas infantiles homologadas o sistemas de retención</strong>, únicamente en el <strong>asiento trasero</strong>.</li>
+              <li>❌ Está <strong>prohibido</strong> transportar a menores de 7 años en el <strong>asiento delantero</strong>, ni con sillas especiales.</li>
+              <li>🪢 El <strong>cinturón de seguridad</strong> es obligatorio para los ocupantes del asiento delantero y para los menores de 7 años en la parte trasera.</li>
+              <li>✅ Antes de iniciar la marcha: todos los ocupantes deben estar <strong>sentados y con el cinturón puesto</strong>.</li>
+              <li>✅ Lo primero que debes hacer antes de arrancar: adoptar postura correcta y <strong>acomodar el asiento</strong> correctamente.</li>
+              <li>❌ No permitas que los niños viajen de pie, sueltos o asomados por las ventanas.</li>
+              <li>⚠️ Una silla infantil mal instalada o de talla incorrecta <strong>no protege</strong> al niño en caso de accidente.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ESTACIONAMIENTO -->
+        <div class="acc-item">
+          <button class="acc-header">
+            🅿️ Normas de Estacionamiento
+            <span class="acc-icon">+</span>
+          </button>
+          <div class="acc-body">
+            <div class="normas-intro-text">Estacionarse en lugares prohibidos genera multas e incluso acarreo del vehículo al depósito. Conoce las normas para evitar infracciones y facilitar el tránsito.</div>
+            <ul class="normas-list">
+              <li>❌ Está <strong>prohibido estacionarse</strong> frente a: garajes, hidrantes de agua, hospitales, y en cualquier zona señalizada con prohibición.</li>
+              <li>🛣️ En carretera: estaciona <strong>fuera de la calzada, dejando libre el arcén</strong>. No obstruyas el paso de otros vehículos.</li>
+              <li>🚛 <strong>El vehículo es trasladado al depósito</strong> cuando: circula sin placas · sin seguro · sin licencia de circulación · está estacionado en lugar no autorizado.</li>
+              <li>⚠️ Al estacionar: activa las <strong>luces de parqueo</strong> y hazte gradualmente a la derecha.</li>
+              <li>↩️ La <strong>marcha en reversa</strong> solo está permitida para ingresar a garajes y maniobras de parqueo.</li>
+              <li>✅ En zona urbana con desperfecto: coloca triángulos de seguridad a <strong>aproximadamente 10 metros</strong> del vehículo.</li>
+              <li>⚠️ El cambio de propietario debe inscribirse en un plazo de <strong>60 días</strong> según la Ley 431. Pasado ese plazo hay sanciones.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <button class="btn-primary complete-module" data-module="normas" id="completeNormas">
+        ✅ Completé este módulo (+50 XP)
+      </button>
+      <div class="modulo-nav">
+        <button class="btn-modulo-prev" data-prev-tab="senales">← 🚦 Señales</button>
+        <button class="btn-modulo-next" data-next-tab="ley431">⚖️ Siguiente: Ley 431 →</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: LEY 431 ── -->
+    <div class="tab-content" id="tab-ley431">
+      <p class="tab-intro">La <strong>Ley 431</strong> — "Ley para el Régimen de Circulación Vehicular e Infracciones de Tránsito" — es la principal norma que rige el tránsito en Nicaragua. Aprobada por la Asamblea Nacional, es de cumplimiento obligatorio para todos.</p>
+
+      <!-- Bloque introductorio -->
+      <div class="ley431-hero">
+        <div class="ley431-hero-text">
+          <h3>📜 ¿Qué es la Ley 431?</h3>
+          <p>Promulgada por la <strong>Asamblea Nacional de Nicaragua</strong>, la Ley 431 establece las normas de circulación, los derechos y deberes de conductores, ciclistas y peatones, los límites de velocidad, las sanciones por infracciones y los programas de educación vial obligatoria en el sistema escolar.</p>
+          <p>Su objetivo principal es <strong>reducir los accidentes de tránsito</strong>, proteger la vida de las personas y garantizar el orden en las vías públicas del país.</p>
+        </div>
+        <div class="ley431-hero-stats">
+          <div class="ley431-stat"><span>431</span><small>Número de Ley</small></div>
+          <div class="ley431-stat"><span>12</span><small>Capítulos</small></div>
+          <div class="ley431-stat"><span>156</span><small>Artículos</small></div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 1: Estructura -->
+      <div class="ley431-section-title">
+        <span class="section-badge">Estructura</span>
+        <h3>📋 Capítulos Principales de la Ley 431</h3>
+      </div>
+      <div class="ley-grid">
+        <div class="ley-card blue">
+          <div class="ley-icon">📖</div>
+          <h3>Cap. I — Disposiciones Generales</h3>
+          <p>Define el objeto y ámbito de aplicación de la ley. Establece que aplica a <strong>todos los vehículos y personas</strong> que circulen por las vías públicas de Nicaragua, incluyendo carreteras, calles y caminos.</p>
+          <span class="ley-tag">Arts. 1–10</span>
+        </div>
+
+        <div class="ley-card red">
+          <div class="ley-icon">🎓</div>
+          <h3>Cap. II — Educación Vial</h3>
+          <p>La educación vial es <strong>obligatoria</strong> en primaria y secundaria. El MINED y la Policía Nacional coordinan programas educativos. Las BRET (Brigadas Estudiantiles de Tránsito) son el principal instrumento en las escuelas.</p>
+          <span class="ley-tag">Arts. 11–20</span>
+        </div>
+
+        <div class="ley-card orange">
+          <div class="ley-icon">📄</div>
+          <h3>Cap. III — Licencias y Habilitación</h3>
+          <p>Regula los requisitos para obtener licencias de conducir. Establece categorías por tipo de vehículo, requisitos de edad mínima y la obligación de portar siempre la licencia vigente al manejar.</p>
+          <span class="ley-tag">Arts. 21–40</span>
+        </div>
+
+        <div class="ley-card green">
+          <div class="ley-icon">🚗</div>
+          <h3>Cap. IV — Requisitos de los Vehículos</h3>
+          <p>Todo vehículo debe contar con <strong>tarjeta de circulación vigente, seguro obligatorio, placa visible</strong> y condiciones mecánicas adecuadas. El incumplimiento genera retención del vehículo.</p>
+          <span class="ley-tag">Arts. 41–55</span>
+        </div>
+
+        <div class="ley-card purple">
+          <div class="ley-icon">🚦</div>
+          <h3>Cap. V — Normas de Circulación</h3>
+          <p>Establece las reglas de tránsito: sentido de circulación, uso de carriles, preferencia de paso, normas en intersecciones, uso de semáforos y señales, y prohibiciones específicas en la vía pública.</p>
+          <span class="ley-tag">Arts. 56–95</span>
+        </div>
+
+        <div class="ley-card teal">
+          <div class="ley-icon">⚠️</div>
+          <h3>Cap. VI — Infracciones y Sanciones</h3>
+          <p>Clasifica las infracciones en <strong>leves, graves y muy graves</strong>. Establece multas, suspensión de licencias, retención de vehículos y responsabilidad penal para los casos más serios como manejar en estado de ebriedad.</p>
+          <span class="ley-tag">Arts. 96–130</span>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: Velocidades -->
+      <div class="ley431-section-title">
+        <span class="section-badge" style="background:var(--orange);color:white;">Velocidades</span>
+        <h3>🚗 Límites de Velocidad — Art. 119</h3>
+      </div>
+      <div class="velocidad-grid">
+        <div class="vel-card vel-school" style="--vel-color:#e53935;">
+          <div class="vel-icon">🏫</div>
+          <div class="vel-num">15</div>
+          <div class="vel-unit">km/h</div>
+          <div class="vel-label">Zona Escolar (con alumnos)</div>
+          <p>Cuando hay estudiantes presentes frente al centro educativo. El límite más bajo de la ley.</p>
+        </div>
+        <div class="vel-card vel-school">
+          <div class="vel-icon">🏫</div>
+          <div class="vel-num">25</div>
+          <div class="vel-unit">km/h</div>
+          <div class="vel-label">Zona Escolar / Hospital / Camino</div>
+          <p>También aplica frente a hospitales, clínicas y en caminos rurales. Máxima precaución.</p>
+        </div>
+        <div class="vel-card" style="--vel-color:#f57c00;">
+          <div class="vel-icon">🔄</div>
+          <div class="vel-num">30</div>
+          <div class="vel-unit">km/h</div>
+          <div class="vel-label">Rotonda</div>
+          <p>En todas las rotondas del país, salvo que la señalización indique un límite diferente.</p>
+        </div>
+        <div class="vel-card">
+          <div class="vel-icon">🏙️</div>
+          <div class="vel-num">45</div>
+          <div class="vel-unit">km/h</div>
+          <div class="vel-label">Zona Urbana (calles)</div>
+          <p>Calles y avenidas dentro de ciudades y poblados. El límite más común en Managua.</p>
+        </div>
+        <div class="vel-card vel-hospital" style="--vel-color:#0277bd;">
+          <div class="vel-icon">🛤️</div>
+          <div class="vel-num">60</div>
+          <div class="vel-unit">km/h</div>
+          <div class="vel-label">Pistas urbanas</div>
+          <p>Pistas y boulevares dentro del área urbana. Ej: Pista Juan Pablo II, Carretera Masaya.</p>
+        </div>
+        <div class="vel-card vel-highway">
+          <div class="vel-icon">🛣️</div>
+          <div class="vel-num">100</div>
+          <div class="vel-unit">km/h</div>
+          <div class="vel-label">Carretera</div>
+          <p>Carreteras interurbanas y nacionales. Circular a más del 30% sobre el límite es conducción temeraria.</p>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: Obligaciones del conductor -->
+      <div class="ley431-section-title">
+        <span class="section-badge" style="background:var(--blue);color:white;">Obligaciones</span>
+        <h3>📋 Obligaciones del Conductor — Arts. 56–80</h3>
+      </div>
+      <div class="ley-grid">
+        <div class="ley-card blue">
+          <div class="ley-icon">🪪</div>
+          <h3>Documentos Obligatorios</h3>
+          <ul>
+            <li>✅ Licencia de conducir vigente</li>
+            <li>✅ Tarjeta de circulación del vehículo</li>
+            <li>✅ Seguro obligatorio de accidentes (SOA)</li>
+            <li>✅ Sticker de revisión técnica al día</li>
+          </ul>
+          <span class="ley-tag">Art. 62</span>
+        </div>
+
+        <div class="ley-card green">
+          <div class="ley-icon">🪢</div>
+          <h3>Cinturón de Seguridad</h3>
+          <p>Obligatorio para <strong>todos los ocupantes</strong> del vehículo, tanto conductor como pasajeros. Aplica en todo tipo de vía. No usarlo es infracción leve con multa.</p>
+          <span class="ley-tag">Art. 93</span>
+        </div>
+
+        <div class="ley-card orange">
+          <div class="ley-icon">⛑️</div>
+          <h3>Casco para Motociclistas</h3>
+          <p>Obligatorio para el <strong>conductor y el pasajero</strong> de toda motocicleta o moto de tres ruedas. El casco debe ser homologado y en buen estado. Infracción inmediata al incumplirlo.</p>
+          <span class="ley-tag">Art. 94</span>
+        </div>
+
+        <div class="ley-card teal">
+          <div class="ley-icon">📏</div>
+          <h3>Distancia de Seguridad</h3>
+          <p>Debes mantener una distancia mínima de <strong>2 segundos</strong> respecto al vehículo de adelante. En lluvia o noche, se recomienda 4 segundos. Seguir muy de cerca es infracción.</p>
+          <span class="ley-tag">Art. 73</span>
+        </div>
+
+        <div class="ley-card purple">
+          <div class="ley-icon">📱</div>
+          <h3>Prohibido el Celular</h3>
+          <p>Usar el teléfono al conducir sin dispositivo manos libres es <strong>infracción grave</strong>. El celular es la principal causa de distracción al volante. Puede resultar en accidentes fatales.</p>
+          <span class="ley-tag">Art. 87</span>
+        </div>
+
+        <div class="ley-card red">
+          <div class="ley-icon">🚸</div>
+          <h3>Preferencia Peatonal</h3>
+          <p>El peatón tiene <strong>derecho preferente de paso</strong> en pasos peatonales señalizados. El conductor debe detenerse obligatoriamente y esperar a que el peatón cruce completamente.</p>
+          <span class="ley-tag">Art. 78</span>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 4: Alcohol y Drogas -->
+      <div class="ley431-section-title">
+        <span class="section-badge" style="background:var(--red);color:white;">Prohibición Absoluta</span>
+        <h3>🍺 Alcohol y Drogas al Volante — Art. 103</h3>
+      </div>
+      <div class="alcohol-banner">
+        <div class="alcohol-icon">🚫🍺</div>
+        <div class="alcohol-content">
+          <h3>TOLERANCIA CERO</h3>
+          <p>Nicaragua establece <strong>0.0 gramos de alcohol por litro de sangre</strong> como límite legal para conductores. No existe un nivel "seguro". Cualquier cantidad de alcohol es ilegal al volante.</p>
+          <div class="alcohol-consecuencias">
+            <div class="cons-item cons-red">
+              <strong>1ª infracción</strong>
+              <span>Multa + retención del vehículo + suspensión temporal de licencia</span>
+            </div>
+            <div class="cons-item cons-red">
+              <strong>2ª infracción</strong>
+              <span>Multa mayor + cancelación de licencia + responsabilidad penal</span>
+            </div>
+            <div class="cons-item cons-red">
+              <strong>Con daños</strong>
+              <span>Cargos penales, prisión y responsabilidad civil por daños y perjuicios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5: Infracciones y multas -->
+      <div class="ley431-section-title">
+        <span class="section-badge" style="background:#6c757d;color:white;">Sanciones</span>
+        <h3>💸 Clasificación de Infracciones — Arts. 96–130</h3>
+      </div>
+      <div class="infracciones-tabla">
+        <div class="infraccion-grupo">
+          <div class="infraccion-header leve">⚡ Infracciones Leves</div>
+          <ul>
+            <li>🔸 No usar cinturón de seguridad</li>
+            <li>🔸 No portar documentos del vehículo</li>
+            <li>🔸 Estacionamiento indebido</li>
+            <li>🔸 No señalizar cambios de carril</li>
+            <li>🔸 Circular sin luces en horario nocturno</li>
+            <li>🔸 No respetar señales informativas</li>
+          </ul>
+          <div class="infraccion-sancion">Multa económica · No genera antecedentes</div>
+        </div>
+        <div class="infraccion-grupo">
+          <div class="infraccion-header grave">🚨 Infracciones Graves</div>
+          <ul>
+            <li>🔶 Exceso de velocidad (hasta 30 km/h sobre el límite)</li>
+            <li>🔶 Uso del celular al conducir</li>
+            <li>🔶 No usar casco en motocicleta</li>
+            <li>🔶 Pasar semáforo en rojo</li>
+            <li>🔶 Adelantar en zona prohibida</li>
+            <li>🔶 No respetar señal de PARE</li>
+          </ul>
+          <div class="infraccion-sancion">Multa + posible retención del vehículo</div>
+        </div>
+        <div class="infraccion-grupo">
+          <div class="infraccion-header muygrave">🚔 Infracciones Muy Graves</div>
+          <ul>
+            <li>🔴 Conducir bajo efectos del alcohol o drogas</li>
+            <li>🔴 Exceso de velocidad mayor de 30 km/h sobre el límite</li>
+            <li>🔴 Fuga del lugar del accidente</li>
+            <li>🔴 Conducir sin licencia</li>
+            <li>🔴 Conducción temeraria poniendo en riesgo vidas</li>
+            <li>🔴 Causar accidente con muertos o heridos graves</li>
+          </ul>
+          <div class="infraccion-sancion">Multa + suspensión/cancelación licencia + responsabilidad penal</div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 5b: Alcohol y alcoholemia -->
+      <div class="ley431-section-title" style="margin-top:40px;">
+        <span class="section-badge" style="background:#b71c1c;color:white;">Alcohol</span>
+        <h3>🍺 Alcoholemia y Sanciones — Ley 431</h3>
+      </div>
+      <div class="alcohol-grid">
+        <div class="alcohol-card ligera">
+          <div class="alcohol-icon">🟡</div>
+          <div class="alcohol-nivel">Embriaguez Ligera</div>
+          <div class="alcohol-rango">0.5 — 1.0 g/L</div>
+          <p>Reflejos reducidos, tiempo de reacción aumentado. Infracción peligrosa con suspensión de licencia.</p>
+        </div>
+        <div class="alcohol-card media">
+          <div class="alcohol-icon">🟠</div>
+          <div class="alcohol-nivel">Embriaguez</div>
+          <div class="alcohol-rango">1.0 — 2.0 g/L</div>
+          <p>Pérdida significativa de coordinación y juicio. Infracción peligrosa, retención hasta 12 horas.</p>
+        </div>
+        <div class="alcohol-card extrema">
+          <div class="alcohol-icon">🔴</div>
+          <div class="alcohol-nivel">Embriaguez Extrema</div>
+          <div class="alcohol-rango">Mayor a 2.0 g/L</div>
+          <p>Infracción de <strong>mayor peligrosidad</strong>. Suspensión de licencia, retención 12h, responsabilidad penal.</p>
+        </div>
+      </div>
+      <div class="reincidencia-box">
+        <h4>⚖️ Reincidencia y Suspensión de Licencia</h4>
+        <p>Se establece reincidencia al acumular en un año: <strong>3 infracciones de mayor peligrosidad</strong>, <strong>6 infracciones peligrosas</strong>, o <strong>una combinación de 4</strong> de ambos tipos.</p>
+        <div class="reincidencia-grid">
+          <div class="reinc-item"><span class="reinc-vez">1ª vez</span><span class="reinc-sancion">Suspensión 3 meses</span></div>
+          <div class="reinc-item"><span class="reinc-vez">2ª vez</span><span class="reinc-sancion">Suspensión 6 meses</span></div>
+          <div class="reinc-item"><span class="reinc-vez">3ª vez</span><span class="reinc-sancion">Suspensión 1 año</span></div>
+          <div class="reinc-item reinc-cancel"><span class="reinc-vez">4ª vez</span><span class="reinc-sancion">Cancelación definitiva</span></div>
+        </div>
+        <p class="reinc-nota">⚠️ Las multas no pagadas en <strong>60 días se duplican</strong>. La boleta amarilla vale como licencia provisional por <strong>30 días</strong>; la boleta roja por <strong>72 horas</strong>.</p>
+      </div>
+
+      <!-- SECCIÓN 6: Derechos de peatones -->
+      <div class="ley431-section-title" style="margin-top:40px;">
+        <span class="section-badge" style="background:var(--green2);color:white;">Peatones</span>
+        <h3>🚶 Derechos y Deberes del Peatón — Arts. 131–140</h3>
+      </div>
+      <div class="ley-grid">
+        <div class="ley-card green">
+          <div class="ley-icon">✅</div>
+          <h3>Derechos del Peatón</h3>
+          <ul>
+            <li>✅ Derecho preferente en cruces señalizados</li>
+            <li>✅ Circular libremente por aceras y andenes</li>
+            <li>✅ Exigir respeto de los conductores en pasos cebra</li>
+            <li>✅ Ser protegido por la autoridad de tránsito</li>
+          </ul>
+          <span class="ley-tag">Arts. 131–135</span>
+        </div>
+        <div class="ley-card orange">
+          <div class="ley-icon">⚠️</div>
+          <h3>Deberes del Peatón</h3>
+          <ul>
+            <li>⚠️ Cruzar solo por pasos autorizados</li>
+            <li>⚠️ No distraerse con el celular al cruzar</li>
+            <li>⚠️ Respetar las señales de tránsito peatonales</li>
+            <li>⚠️ No caminar por el centro de la calzada</li>
+            <li>⚠️ Usar ropa reflectante en zonas sin alumbrado</li>
+          </ul>
+          <span class="ley-tag">Arts. 136–140</span>
+        </div>
+        <div class="ley-card blue">
+          <div class="ley-icon">👮</div>
+          <h3>BRET — Brigadas Estudiantiles</h3>
+          <p>Las <strong>Brigadas Estudiantiles de Tránsito</strong> son el programa educativo escolar coordinado por la Policía Nacional y el MINED. Capacitan a estudiantes como promotores de la seguridad vial en sus comunidades.</p>
+          <span class="ley-tag">Programa Nacional</span>
+        </div>
+        <div class="ley-card purple">
+          <div class="ley-icon">🆘</div>
+          <h3>En Caso de Accidente</h3>
+          <ul>
+            <li>🚨 Llama al <strong>118</strong> (emergencias)</li>
+            <li>👮 Llama al <strong>101</strong> (Policía Nacional)</li>
+            <li>🚒 Bomberos: <strong>115</strong></li>
+            <li>🚑 Cruz Roja: <strong>128</strong></li>
+            <li>❌ No huyas — es delito según Art. 150</li>
+          </ul>
+          <span class="ley-tag">Art. 150</span>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 7: Datos clave para el examen teórico -->
+      <div class="ley431-section-title" style="margin-top:40px;">
+        <span class="section-badge" style="background:#4a148c;color:white;">Examen</span>
+        <h3>📝 Datos Clave para el Examen Teórico</h3>
+      </div>
+      <div class="datos-clave-grid">
+        <div class="dato-card">
+          <div class="dato-icon">🪪</div>
+          <div class="dato-titulo">Licencias en Nicaragua</div>
+          <ul>
+            <li><strong>Profesional</strong> — para conductores que ejercen la conducción como ocupación permanente</li>
+            <li><strong>Ordinaria</strong> — para uso personal</li>
+            <li><strong>Especial</strong> — vehículos especiales</li>
+            <li><strong>De menor de edad</strong> — con restricciones</li>
+          </ul>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">📋</div>
+          <div class="dato-titulo">3 Documentos Obligatorios al Conducir</div>
+          <ul>
+            <li>1️⃣ Licencia de conducir</li>
+            <li>2️⃣ Licencia de circulación (tarjeta)</li>
+            <li>3️⃣ Seguro de responsabilidad civil</li>
+          </ul>
+          <small>Art. 57 — Si te falta alguno, es infracción inmediata</small>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">🚸</div>
+          <div class="dato-titulo">Silla Infantil — Reglas</div>
+          <ul>
+            <li>Niños <strong>menores de 7 años</strong>: silla homologada en asiento trasero</li>
+            <li>Prohibido en asiento delantero aunque sea con silla</li>
+            <li>Cinturón obligatorio para todos los del asiento delantero</li>
+          </ul>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">⚖️</div>
+          <div class="dato-titulo">Clases de Vehículos</div>
+          <ul>
+            <li>🐂 <strong>Tracción animal</strong> — circula por el arcén</li>
+            <li>🚲 <strong>Tracción humana</strong> — circula por el arcén derecho</li>
+            <li>🚗 <strong>Automotor</strong> — vías generales</li>
+          </ul>
+          <small>Los de tracción humana/animal deben llevar señales lumínicas y cintas reflectivas</small>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">🔺</div>
+          <div class="dato-titulo">Triángulos de Seguridad</div>
+          <ul>
+            <li>Zona urbana: a <strong>~10 metros</strong> del vehículo</li>
+            <li>Carretera: a mayor distancia para dar aviso anticipado</li>
+            <li>Obligatorio colocarlos ante cualquier desperfecto</li>
+          </ul>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">📋</div>
+          <div class="dato-titulo">Lo Primero Antes de Arrancar</div>
+          <ul>
+            <li>✅ Revisar condiciones técnicas y mecánicas del vehículo</li>
+            <li>✅ Adoptar postura correcta y acomodar el asiento</li>
+            <li>✅ Colocarse el cinturón de seguridad</li>
+            <li>✅ Verificar espejos retrovisores</li>
+          </ul>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">🅿️</div>
+          <div class="dato-titulo">Causales de Acarreo al Depósito</div>
+          <ul>
+            <li>❌ Circular sin placas</li>
+            <li>❌ Circular sin seguro obligatorio</li>
+            <li>❌ Circular sin licencia de circulación</li>
+            <li>❌ Estacionado en lugar no autorizado</li>
+          </ul>
+        </div>
+        <div class="dato-card">
+          <div class="dato-icon">🔁</div>
+          <div class="dato-titulo">Cambio de Propietario</div>
+          <ul>
+            <li>Plazo legal para inscripción: <strong>60 días</strong></li>
+            <li>Después del plazo: sanciones y complicaciones legales</li>
+            <li>Debe tramitarse ante el MTI / Tránsito</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn-primary complete-module" data-module="ley431" id="completeLey">
+        ✅ Completé este módulo (+50 XP)
+      </button>
+      <div class="modulo-nav">
+        <button class="btn-modulo-prev" data-prev-tab="normas">← 📋 Normas</button>
+        <button class="btn-modulo-next" data-next-stab="quiz-section">🎯 ¡Ir al Quiz! →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUIZ ===== -->
+  <section id="quiz-section" class="section section-alt">
+    <div class="section-header">
+      <span class="section-badge">Módulo 2</span>
+      <h2>🎯 Evalúate</h2>
+      <p>Pon a prueba tu conocimiento vial. ¡Gana XP y sube de nivel!</p>
+    </div>
+
+    <div class="quiz-categories">
+      <div class="quiz-cat" data-cat="basico" id="cat-basico">
+        <div class="cat-icon">🟢</div>
+        <h3>Nivel Básico</h3>
+        <p>Señales, semáforos y normas para niños y principiantes</p>
+        <div class="cat-meta">
+          <span>12 preguntas</span>
+          <span class="cat-best" id="best-basico">Mejor: —</span>
+        </div>
+        <button class="btn-quiz" onclick="startQuiz('basico')">¡Jugar!</button>
+      </div>
+
+      <div class="quiz-cat" data-cat="intermedio" id="cat-intermedio">
+        <div class="cat-icon">🟡</div>
+        <h3>Nivel Intermedio</h3>
+        <p>Ley 431, estadísticas y normas para adolescentes</p>
+        <div class="cat-meta">
+          <span>12 preguntas</span>
+          <span class="cat-best" id="best-intermedio">Mejor: —</span>
+        </div>
+        <button class="btn-quiz" onclick="startQuiz('intermedio')">¡Jugar!</button>
+      </div>
+
+      <div class="quiz-cat" data-cat="avanzado" id="cat-avanzado">
+        <div class="cat-icon">🔴</div>
+        <h3>Nivel Avanzado</h3>
+        <p>Artículos de la Ley 431, infracciones y datos para adultos</p>
+        <div class="cat-meta">
+          <span>12 preguntas</span>
+          <span class="cat-best" id="best-avanzado">Mejor: —</span>
+        </div>
+        <button class="btn-quiz" onclick="startQuiz('avanzado')">¡Jugar!</button>
+      </div>
+
+      <div class="quiz-cat quiz-cat-full" data-cat="completo" id="cat-completo">
+        <div class="cat-icon">🏆</div>
+        <h3>¡Quiz Completo!</h3>
+        <p>30 preguntas mezcladas de todos los niveles</p>
+        <div class="cat-meta">
+          <span>30 preguntas</span>
+          <span class="cat-best" id="best-completo">Mejor: —</span>
+        </div>
+        <button class="btn-quiz btn-gold" onclick="startQuiz('completo')">¡Reto Máximo!</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ESCENARIOS ===== -->
+  <section id="escenarios" class="section">
+    <div class="section-header">
+      <span class="section-badge">Módulo 3</span>
+      <h2>🚗 Escenarios Reales</h2>
+      <p>¿Qué harías en estas situaciones? Toma decisiones y aprende de las consecuencias.</p>
+    </div>
+
+    <div class="escenarios-grid" id="escenariosGrid">
+
+      <div class="escenario-card" data-esc="0">
+        <div class="esc-img">🚦🚗</div>
+        <div class="esc-content">
+          <span class="esc-badge new">Básico</span>
+          <h3>El Semáforo en Ámbar</h3>
+          <p>Vas a 45 km/h y el semáforo cambia a amarillo cuando estás a 30 metros. ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(0)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="1">
+        <div class="esc-img">🚶📱</div>
+        <div class="esc-content">
+          <span class="esc-badge warning">Peligro</span>
+          <h3>El Peatón Distraído</h3>
+          <p>Un peatón cruza mirando su celular sin fijarse en el tráfico. Vas a 40 km/h.</p>
+          <button class="btn-escenario" onclick="openEscenario(1)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="2">
+        <div class="esc-img">🏍️⛑️</div>
+        <div class="esc-content">
+          <span class="esc-badge danger">Crítico</span>
+          <h3>La Motocicleta Sin Casco</h3>
+          <p>Tu amigo te invita a subir a su moto. No hay cascos disponibles. Son las 9 PM.</p>
+          <button class="btn-escenario" onclick="openEscenario(2)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="3">
+        <div class="esc-img">🍺🚗</div>
+        <div class="esc-content">
+          <span class="esc-badge danger">Crítico</span>
+          <h3>El Conductor que Tomó</h3>
+          <p>En una reunión, quien te iba a llevar bebió alcohol. Son las 11 PM.</p>
+          <button class="btn-escenario" onclick="openEscenario(3)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="4">
+        <div class="esc-img">🔱🚗</div>
+        <div class="esc-content">
+          <span class="esc-badge warning">Importante</span>
+          <h3>La Intersección Sin Señales</h3>
+          <p>Llegas a una intersección sin semáforo ni señales. Hay otro vehículo llegando por tu derecha.</p>
+          <button class="btn-escenario" onclick="openEscenario(4)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="5">
+        <div class="esc-img">📱🚗💥</div>
+        <div class="esc-content">
+          <span class="esc-badge danger">Crítico</span>
+          <h3>El Mensaje Urgente</h3>
+          <p>Recibes un WhatsApp mientras conduces en la carretera. Dice "URGENTE". ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(5)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="6">
+        <div class="esc-img">🚗💨🌧️</div>
+        <div class="esc-content">
+          <span class="esc-badge warning">Peligro</span>
+          <h3>Lluvia Torrencial</h3>
+          <p>Manejando en carretera a 80 km/h, empieza una lluvia muy fuerte y no ves bien. ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(6)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="7">
+        <div class="esc-img">🚑🚨🚗</div>
+        <div class="esc-content">
+          <span class="esc-badge warning">Importante</span>
+          <h3>La Ambulancia que Pasa</h3>
+          <p>Escuchas una sirena de ambulancia acercándose por detrás mientras vas en una vía de dos carriles. ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(7)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="8">
+        <div class="esc-img">🚗💥🧍</div>
+        <div class="esc-content">
+          <span class="esc-badge danger">Crítico</span>
+          <h3>Testigo de un Accidente</h3>
+          <p>Presencias un accidente grave en la carretera con heridos visibles. Eres el primero en llegar al lugar. ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(8)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="9">
+        <div class="esc-img">😴🚗🌙</div>
+        <div class="esc-content">
+          <span class="esc-badge danger">Crítico</span>
+          <h3>El Conductor Somnoliento</h3>
+          <p>Son las 2 AM, llevas 4 horas manejando y sientes que te quedas dormido al volante. Faltan 40 km para llegar. ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(9)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="10">
+        <div class="esc-img">🚗🚛➖</div>
+        <div class="esc-content">
+          <span class="esc-badge warning">Importante</span>
+          <h3>El Adelantamiento Prohibido</h3>
+          <p>Hay un camión lento frente a ti en carretera. La línea central es amarilla continua. El carril contrario parece libre. ¿Qué haces?</p>
+          <button class="btn-escenario" onclick="openEscenario(10)">Ver escenario →</button>
+        </div>
+      </div>
+
+      <div class="escenario-card" data-esc="11">
+        <div class="esc-img">🚦❌🚗</div>
+        <div class="esc-content">
+          <span class="esc-badge warning">Importante</span>
+          <h3>El Semáforo Apagado</h3>
+          <p>Llegas a una intersección de Managua con el semáforo completamente apagado. Hay vehículos llegando de todos los lados. ¿Cómo procedes?</p>
+          <button class="btn-escenario" onclick="openEscenario(11)">Ver escenario →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ESTADÍSTICAS ===== -->
+  <section id="estadisticas" class="section section-dark">
+    <div class="section-header light">
+      <span class="section-badge">Datos Reales</span>
+      <h2>📊 Nicaragua en Números</h2>
+      <p>Estadísticas reales de la Policía Nacional · 2025</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card stat-red">
+        <div class="stat-icon-big">💀</div>
+        <div class="stat-number counter" data-target="903">0</div>
+        <div class="stat-label">Fallecidos en 2025</div>
+        <div class="stat-sub">-38 vs 2024 (941)</div>
+      </div>
+      <div class="stat-card stat-orange">
+        <div class="stat-icon-big">🚑</div>
+        <div class="stat-number counter" data-target="38024">0</div>
+        <div class="stat-label">Accidentes (Ene-Sep 2025)</div>
+        <div class="stat-sub">Más de 100 por día</div>
+      </div>
+      <div class="stat-card stat-yellow">
+        <div class="stat-icon-big">🏍️</div>
+        <div class="stat-number">55.9%</div>
+        <div class="stat-label">Víctimas son motorizados</div>
+        <div class="stat-sub">El grupo más vulnerable</div>
+      </div>
+      <div class="stat-card stat-blue">
+        <div class="stat-icon-big">👦</div>
+        <div class="stat-number">77%</div>
+        <div class="stat-label">Involucran jóvenes</div>
+        <div class="stat-sub">Con baja educación vial</div>
+      </div>
+      <div class="stat-card stat-purple">
+        <div class="stat-icon-big">📅</div>
+        <div class="stat-number">58.5%</div>
+        <div class="stat-label">Ocurren en fines de semana</div>
+        <div class="stat-sub">Sábado, domingo y lunes</div>
+      </div>
+      <div class="stat-card stat-teal">
+        <div class="stat-icon-big">🌙</div>
+        <div class="stat-number">62.4%</div>
+        <div class="stat-label">En horario vespertino/nocturno</div>
+        <div class="stat-sub">Mayor riesgo de noche</div>
+      </div>
+    </div>
+
+    <div class="stats-chart-wrap">
+      <h3>Accidentalidad por Departamento</h3>
+      <div class="bar-chart" id="barChart">
+        <div class="bar-item">
+          <span class="bar-label">Managua</span>
+          <div class="bar-track"><div class="bar-fill" data-width="100" style="--w:100%"></div></div>
+          <span class="bar-val">1er lugar</span>
+        </div>
+        <div class="bar-item">
+          <span class="bar-label">León</span>
+          <div class="bar-track"><div class="bar-fill" data-width="65" style="--w:65%"></div></div>
+          <span class="bar-val">2do lugar</span>
+        </div>
+        <div class="bar-item">
+          <span class="bar-label">Matagalpa</span>
+          <div class="bar-track"><div class="bar-fill" data-width="50" style="--w:50%"></div></div>
+          <span class="bar-val">3er lugar</span>
+        </div>
+        <div class="bar-item">
+          <span class="bar-label">Chinandega</span>
+          <div class="bar-track"><div class="bar-fill" data-width="38" style="--w:38%"></div></div>
+          <span class="bar-val">4to lugar</span>
+        </div>
+        <div class="bar-item">
+          <span class="bar-label">Otros</span>
+          <div class="bar-track"><div class="bar-fill" data-width="25" style="--w:25%"></div></div>
+          <span class="bar-val">Resto</span>
+        </div>
+      </div>
+      <p class="chart-source">Fuente: Policía Nacional de Nicaragua, 2025 · Proyecto de Investigación UNMRMA</p>
+    </div>
+  </section>
+
+  <!-- ===== LOGROS ===== -->
+  <section id="logros" class="section">
+    <div class="section-header">
+      <span class="section-badge">Gamificación</span>
+      <h2>🏆 Mis Logros</h2>
+      <p>Completa módulos y quizzes para desbloquear insignias</p>
+    </div>
+
+    <div class="nivel-card" id="nivelCard">
+      <div class="nivel-info">
+        <div class="nivel-badge" id="nivelBadge">🚦</div>
+        <div>
+          <h3 id="nivelNombre">Novato Vial</h3>
+          <p id="nivelDesc">Completa módulos para subir de nivel</p>
+        </div>
+      </div>
+      <div class="nivel-progress">
+        <div class="nivel-xp">
+          <span id="xpActual">0</span> / <span id="xpNecesario">100</span> XP
+        </div>
+        <div class="nivel-bar">
+          <div class="nivel-bar-fill" id="nivelBarFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logros-grid" id="logrosGrid">
+
+      <div class="logro-item locked" id="logro-bienvenido">
+        <div class="logro-icon">👋</div>
+        <h4>¡Bienvenido!</h4>
+        <p>Selecciona tu perfil de edad</p>
+        <span class="logro-xp">+20 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-senales">
+        <div class="logro-icon">🚦</div>
+        <h4>Maestro de Señales</h4>
+        <p>Completa el módulo de señales</p>
+        <span class="logro-xp">+50 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-normas">
+        <div class="logro-icon">📋</div>
+        <h4>Conoce las Normas</h4>
+        <p>Completa el módulo de normas</p>
+        <span class="logro-xp">+50 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-ley431">
+        <div class="logro-icon">⚖️</div>
+        <h4>Experto en Ley 431</h4>
+        <p>Completa el módulo de la Ley 431</p>
+        <span class="logro-xp">+50 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-primerquiz">
+        <div class="logro-icon">🎯</div>
+        <h4>Primer Examen</h4>
+        <p>Completa tu primer quiz</p>
+        <span class="logro-xp">+30 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-quiz100">
+        <div class="logro-icon">💯</div>
+        <h4>¡Perfección!</h4>
+        <p>Saca 100% en cualquier quiz</p>
+        <span class="logro-xp">+100 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-escenarios">
+        <div class="logro-icon">🚗</div>
+        <h4>Decisiones Inteligentes</h4>
+        <p>Completa todos los escenarios</p>
+        <span class="logro-xp">+70 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-guardian">
+        <div class="logro-icon">🛡️</div>
+        <h4>¡Guardián Vial!</h4>
+        <p>Desbloquea todos los logros anteriores</p>
+        <span class="logro-xp">+200 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-velocista">
+        <div class="logro-icon">🏎️</div>
+        <h4>Velocista del Quiz</h4>
+        <p>Completa 3 quizzes diferentes</p>
+        <span class="logro-xp">+40 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-tolerancia">
+        <div class="logro-icon">🧊</div>
+        <h4>Tolerancia Cero</h4>
+        <p>Decide correctamente ante el conductor ebrio</p>
+        <span class="logro-xp">+25 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-casco">
+        <div class="logro-icon">⛑️</div>
+        <h4>Seguridad Primero</h4>
+        <p>Toma la decisión correcta sobre el casco de moto</p>
+        <span class="logro-xp">+20 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-quiz-inter">
+        <div class="logro-icon">🌟</div>
+        <h4>Nivel Medio Superado</h4>
+        <p>Completa el quiz intermedio con ≥ 80%</p>
+        <span class="logro-xp">+40 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-quiz-avanc">
+        <div class="logro-icon">🔥</div>
+        <h4>Nivel Experto Superado</h4>
+        <p>Completa el quiz avanzado con ≥ 70%</p>
+        <span class="logro-xp">+60 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-madrugador">
+        <div class="logro-icon">🌙</div>
+        <h4>Conductor Responsable</h4>
+        <p>Decide correctamente ante el sueño al volante</p>
+        <span class="logro-xp">+25 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-tres-modulos">
+        <div class="logro-icon">🎓</div>
+        <h4>Estudiante Completo</h4>
+        <p>Completa los 3 módulos de aprendizaje</p>
+        <span class="logro-xp">+75 XP</span>
+      </div>
+
+      <div class="logro-item locked" id="logro-quiz-completo">
+        <div class="logro-icon">🏆</div>
+        <h4>¡Reto Máximo!</h4>
+        <p>Completa el quiz completo de 30 preguntas</p>
+        <span class="logro-xp">+80 XP</span>
+      </div>
+
+    </div>
+  </section>
+
+  </div><!-- /#mainContent -->
+
+  <!-- ===== SIDE NAV (Floating dots) ===== -->
+  <nav class="side-nav" id="sideNav" aria-label="Navegación rápida">
+    <a href="#aprende" class="sn-dot" data-section="aprende">
+      <span class="sn-indicator"></span>
+      <span class="sn-tooltip">📚 Aprende</span>
+    </a>
+    <a href="#quiz-section" class="sn-dot" data-section="quiz-section">
+      <span class="sn-indicator"></span>
+      <span class="sn-tooltip">🎯 Quiz</span>
+    </a>
+    <a href="#escenarios" class="sn-dot" data-section="escenarios">
+      <span class="sn-indicator"></span>
+      <span class="sn-tooltip">🚗 Escenarios</span>
+    </a>
+    <a href="#estadisticas" class="sn-dot" data-section="estadisticas">
+      <span class="sn-indicator"></span>
+      <span class="sn-tooltip">📊 Estadísticas</span>
+    </a>
+    <a href="#logros" class="sn-dot" data-section="logros">
+      <span class="sn-indicator"></span>
+      <span class="sn-tooltip">🏆 Logros</span>
+    </a>
+  </nav>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">🚦 VialNic</div>
+        <p>Plataforma educativa de educación vial para Nicaragua.</p>
+        <p>Basada en la <strong>Ley 431</strong> y datos de la <strong>Policía Nacional</strong>.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="https://legislacion.asamblea.gob.ni" target="_blank" rel="noopener">Ley 431 Oficial</a></li>
+          <li><a href="https://www.mined.gob.ni" target="_blank" rel="noopener">MINED Nicaragua</a></li>
+          <li><a href="#aprende">Módulos de Aprendizaje</a></li>
+          <li><a href="#quiz-section">Quiz Interactivo</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Emergencias</h4>
+        <ul>
+          <li>🚨 Emergencias: <strong>118</strong></li>
+          <li>👮 Policía Nacional: <strong>101</strong></li>
+          <li>🚒 Bomberos: <strong>115</strong></li>
+          <li>🚑 Cruz Roja: <strong>128</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Proyecto de Investigación Aplicada · <strong>Universidad Nacional Multidisciplinaria Ricardo Morales Avilés</strong> · Managua, Nicaragua · 2026</p>
+      <p>Desarrollado por: <strong>Jason</strong> · Docente: Lic. Pedro González</p>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL QUIZ ===== -->
+  <div class="modal-overlay" id="quizModal">
+    <div class="quiz-modal">
+      <div class="quiz-modal-header">
+        <div class="qm-left">
+          <span class="qm-level" id="qmLevel">Básico</span>
+          <span class="qm-counter" id="qmCounter">1 / 8</span>
+        </div>
+        <div class="qm-timer" id="qmTimer">30</div>
+        <button class="qm-close" id="qmClose">✕</button>
+      </div>
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div>
+      </div>
+      <div class="quiz-modal-body" id="quizBody">
+        <div class="quiz-question" id="quizQuestion">Cargando pregunta...</div>
+        <div class="quiz-options" id="quizOptions"></div>
+      </div>
+      <div class="quiz-modal-footer">
+        <div class="quiz-score">
+          ⭐ <span id="quizScore">0</span> pts
+        </div>
+        <div class="quiz-explanation" id="quizExplanation" style="display:none"></div>
+        <button class="btn-primary" id="quizNextBtn" style="display:none">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL ESCENARIO ===== -->
+  <div class="modal-overlay" id="escModal">
+    <div class="esc-modal">
+      <button class="qm-close" id="escClose">✕</button>
+      <div class="esc-modal-scene" id="escScene"></div>
+      <h3 id="escTitle"></h3>
+      <p id="escDesc"></p>
+      <div class="esc-options" id="escOptions"></div>
+      <div class="esc-result" id="escResult" style="display:none">
+        <div class="esc-result-icon" id="escResultIcon"></div>
+        <h4 id="escResultTitle"></h4>
+        <p id="escResultText"></p>
+        <div class="esc-result-ley" id="escResultLey"></div>
+        <button class="btn-primary" id="escNextBtn">Siguiente escenario →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL LOGRO ===== -->
+  <div class="modal-overlay" id="logroModal">
+    <div class="logro-modal">
+      <div class="confetti-container" id="confettiContainer"></div>
+      <div class="logro-modal-icon" id="logroModalIcon">🏆</div>
+      <h2>¡Logro Desbloqueado!</h2>
+      <h3 id="logroModalTitle"></h3>
+      <p id="logroModalDesc"></p>
+      <div class="logro-xp-gained" id="logroXpGained">+50 XP</div>
+      <button class="btn-primary" id="logroModalClose">¡Genial! ✨</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL REGISTRO DE NOMBRE ===== -->
+  <div class="modal-overlay" id="nombreModal">
+    <div class="nombre-modal">
+      <div class="nombre-modal-icon">📝</div>
+      <h2>¿Cuál es tu nombre?</h2>
+      <p>Ingresa tu nombre para registrar tu progreso y generar tu certificado personalizado.</p>
+      <input type="text" id="inputNombre" class="nombre-input" placeholder="Ej: María López" maxlength="60" autocomplete="name"/>
+      <div class="nombre-modal-btns">
+        <button class="btn-primary btn-green" id="btnGuardarNombre">✅ Guardar y continuar</button>
+        <button class="btn-primary" style="background:var(--gray);margin-top:8px" id="btnSaltarNombre">Continuar sin nombre</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL CERTIFICADO ===== -->
+  <div class="modal-overlay" id="certModal">
+    <div class="cert-modal">
+      <button class="qm-close" id="certClose">✕</button>
+      <div class="certificado" id="certificado">
+        <div class="cert-header">
+          <div class="cert-logo">🚦</div>
+          <h2>VialNic</h2>
+          <p>Educación Vial Nicaragua</p>
+        </div>
+        <div class="cert-divider"></div>
+        <p class="cert-certifica">CERTIFICA QUE</p>
+        <h3 class="cert-nombre" id="certNombre">Estudiante</h3>
+        <p class="cert-texto">Ha completado satisfactoriamente el programa de<br><strong>Educación Vial Interactiva</strong><br>con base en la Ley 431 de Nicaragua</p>
+        <div class="cert-score-row">
+          <div class="cert-stat"><span id="certXP">0</span><small>XP Total</small></div>
+          <div class="cert-stat"><span id="certNivel">—</span><small>Nivel alcanzado</small></div>
+          <div class="cert-stat"><span id="certLogros">0</span><small>Logros</small></div>
+        </div>
+        <div class="cert-divider"></div>
+        <p class="cert-date" id="certDate"></p>
+        <p class="cert-firma">Proyecto de Investigación Aplicada · UNMRMA · 2026</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <button class="btn-primary" onclick="window.print()">🖨️ Imprimir Certificado</button>
+        <button class="btn-primary btn-green" id="btnDescargarRegistro">📥 Descargar mi registro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div id="toastContainer"></div>
+
+  <!-- ===== BOTÓN FLOTANTE CERTIFICADO ===== -->
+  <button class="fab-cert" id="fabCert" title="Ver mi certificado" style="display:none">🏆</button>
+
+  <!-- ===== SECTION TAB BAR (moved to end of body — no ancestor can break position:fixed) ===== -->
+  <nav class="section-tabs" id="sectionTabs" role="tablist" aria-label="Navegación de secciones">
+    <button class="stab-btn active" data-target="aprende"      role="tab" aria-selected="true"><span class="stab-icon">📚</span><span class="stab-label">Aprende</span></button>
+    <button class="stab-btn"        data-target="quiz-section" role="tab" aria-selected="false"><span class="stab-icon">🎯</span><span class="stab-label">Quiz</span></button>
+    <button class="stab-btn"        data-target="escenarios"   role="tab" aria-selected="false"><span class="stab-icon">🚗</span><span class="stab-label">Escenarios</span></button>
+    <button class="stab-btn"        data-target="estadisticas" role="tab" aria-selected="false"><span class="stab-icon">📊</span><span class="stab-label">Estadísticas</span></button>
+    <button class="stab-btn"        data-target="logros"       role="tab" aria-selected="false"><span class="stab-icon">🏆</span><span class="stab-label">Logros</span></button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
