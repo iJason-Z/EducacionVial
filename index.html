@@ -9,7 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
-  <script>if('scrollRestoration'in history)history.scrollRestoration='manual';</script>
+  <script>
+    // Run before anything renders — reset scroll and clear saved tab so page
+    // always starts at the hero on load/reload, not mid-page.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    history.replaceState(null, '', window.location.pathname);
+    try { localStorage.removeItem('vialnic_active_tab'); } catch(e) {}
+    window.scrollTo(0, 0);
+  </script>
 </head>
 <body>
 
@@ -57,16 +64,16 @@
   <section id="hero" class="hero">
     <div class="hero-bg-road">
       <div class="road-stripes"></div>
-      <div class="car car-a">🚗</div>
-      <div class="car car-b">🚙</div>
-      <div class="car car-c">🏍️</div>
-      <div class="car car-d">🚌</div>
-      <div class="car car-e">🚕</div>
-      <div class="car car-f">🚓</div>
-      <div class="car car-g">🚑</div>
-      <div class="car car-h">🚛</div>
-      <div class="car car-i">🚲</div>
-      <div class="car car-j">🛻</div>
+      <div class="car-track car-a"><span class="car">🚗</span></div>
+      <div class="car-track car-b"><span class="car">🚙</span></div>
+      <div class="car-track car-c"><span class="car">🏍️</span></div>
+      <div class="car-track car-d"><span class="car">🚌</span></div>
+      <div class="car-track car-e"><span class="car">🚕</span></div>
+      <div class="car-track car-f"><span class="car">🚓</span></div>
+      <div class="car-track car-g"><span class="car">🚑</span></div>
+      <div class="car-track car-h"><span class="car">🚛</span></div>
+      <div class="car-track car-i"><span class="car">🚲</span></div>
+      <div class="car-track car-j"><span class="car">🛻</span></div>
       <div class="semaforo-hero" id="semaforoHero">
         <div class="sh-body">
           <div class="sh-luz red" id="shRed"></div>

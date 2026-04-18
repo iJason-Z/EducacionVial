@@ -304,15 +304,22 @@ ul { list-style: none; }
 }
 @keyframes roadMove { from { left: -100%; } to { left: 0; } }
 
-.car {
+.car-track {
   position: absolute;
-  font-size: 2rem;
   bottom: 16px;
   left: 0;
-  /* transform is composited on the GPU — smooth 60fps with no layout recalculation.
-     scaleX(-1) flips the emoji to face right; translateX drives the movement. */
   animation: carRide linear infinite;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.car {
+  display: block;
+  font-size: 2rem;
+  transform: scaleX(-1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /*
@@ -329,28 +336,32 @@ ul { list-style: none; }
 
 /* ── Carril A (rápido, superior) ───────────────────────── */
 /* 3 vehículos, duración ~5s → separación ~1.67s */
-.car-a { bottom: 80px; font-size: 2rem;   animation-duration: 5s;  animation-delay: 0s;      }
-.car-e { bottom: 80px; font-size: 2rem;   animation-duration: 5s;  animation-delay: -1.67s;  }
-.car-f { bottom: 78px; font-size: 1.8rem; animation-duration: 5s;  animation-delay: -3.33s;
-         filter: drop-shadow(0 0 5px #1155ff); } /* patrulla: brillo azul */
+.car-a { bottom: 80px; animation-duration: 5s;  animation-delay: 0s;      }
+.car-e { bottom: 80px; animation-duration: 5s;  animation-delay: -1.67s;  }
+.car-f { bottom: 78px; animation-duration: 5s;  animation-delay: -3.33s;  }
+.car-f .car { font-size: 1.8rem; filter: drop-shadow(0 0 5px #1155ff); } /* patrulla: brillo azul */
 
 /* ── Carril B (medio, motos/bici) ──────────────────────── */
 /* 3 vehículos, duración ~4s → separación ~1.33s */
-.car-c { bottom: 42px; font-size: 1.5rem; animation-duration: 4s;  animation-delay: 0s;      }
-.car-g { bottom: 44px; font-size: 1.9rem; animation-duration: 4s;  animation-delay: -1.33s;
-         filter: drop-shadow(0 0 5px #ff3333); } /* ambulancia: brillo rojo */
-.car-i { bottom: 40px; font-size: 1.3rem; animation-duration: 4s;  animation-delay: -2.67s;  }
+.car-c { bottom: 42px; animation-duration: 4s;  animation-delay: 0s;      }
+.car-g { bottom: 44px; animation-duration: 4s;  animation-delay: -1.33s;  }
+.car-g .car { font-size: 1.9rem; filter: drop-shadow(0 0 5px #ff3333); } /* ambulancia: brillo rojo */
+.car-i { bottom: 40px; animation-duration: 4s;  animation-delay: -2.67s;  }
+.car-i .car { font-size: 1.3rem; }
 
 /* ── Carril C (lento, inferior) ────────────────────────── */
 /* 4 vehículos, duración ~11s → separación ~2.75s */
-.car-b { bottom:  8px; font-size: 1.6rem; animation-duration: 11s; animation-delay: 0s;      }
-.car-d { bottom:  6px; font-size: 2.4rem; animation-duration: 11s; animation-delay: -2.75s;  }
-.car-h { bottom:  7px; font-size: 2rem;   animation-duration: 11s; animation-delay: -5.5s;   }
-.car-j { bottom:  9px; font-size: 1.9rem; animation-duration: 11s; animation-delay: -8.25s;  }
+.car-b { bottom:  8px; animation-duration: 11s; animation-delay: 0s;      }
+.car-b .car { font-size: 1.6rem; }
+.car-d { bottom:  6px; animation-duration: 11s; animation-delay: -2.75s;  }
+.car-d .car { font-size: 2.4rem; }
+.car-h { bottom:  7px; animation-duration: 11s; animation-delay: -5.5s;   }
+.car-j { bottom:  9px; animation-duration: 11s; animation-delay: -8.25s;  }
+.car-j .car { font-size: 1.9rem; }
 
 @keyframes carRide {
-  from { transform: scaleX(-1) translateX(80px); }
-  to   { transform: scaleX(-1) translateX(calc(-100vw - 160px)); }
+  from { transform: translateX(-150px); }
+  to   { transform: translateX(var(--road-w, 1600px)); }
 }
 
 .semaforo-hero {

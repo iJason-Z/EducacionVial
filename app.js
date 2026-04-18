@@ -709,6 +709,11 @@ function cargarEstado() {
 // ════════════════════════════════════════════════════════════
 // INICIALIZACIÓN
 // ════════════════════════════════════════════════════════════
+// Garantiza scroll al tope incluso después de la restauración del navegador
+window.addEventListener('load', () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Siempre iniciar desde el tope de la página
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -840,6 +845,13 @@ function initNavbar() {
 
 // ── Hero: Selección de perfil ──────────────────────────────
 function initHero() {
+  // Setea --road-w una sola vez para que el keyframe use un valor fijo (no calc en cada frame)
+  const road = document.querySelector('.hero-bg-road');
+  if (road) {
+    const w = road.offsetWidth;
+    document.documentElement.style.setProperty('--road-w', (w + 150) + 'px');
+  }
+
   const cards = document.querySelectorAll('.profile-card');
   const cta   = document.getElementById('heroCta');
   const greeting = document.getElementById('ctaGreeting');
@@ -1612,9 +1624,8 @@ function activateTab(targetId, animate) {
     }
   });
 
-  // Persist and update URL hash
-  localStorage.setItem('vialnic_active_tab', targetId);
-  history.replaceState(null, '', '#' + targetId);
+  // No persistimos el tab activo — no hash en URL ni localStorage,
+  // así la página siempre arranca en el hero al recargar.
 
   // Scroll so the active section starts just below the fixed bars.
   if (animate) {
