@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="VialNic - Plataforma interactiva de educación vial para Nicaragua. Aprende la Ley 431, señales de tránsito y normas viales."/>
   <title>VialNic 🚦 Educación Vial Interactiva · Nicaragua</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚦</text></svg>">
+  <meta name="theme-color" content="#1D3557"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css?v=2"/>
   <script>
     // Run before anything renders — reset scroll and clear saved tab so page
     // always starts at the hero on load/reload, not mid-page.
@@ -54,7 +56,7 @@
         <li><a href="#estadisticas">📊 Estadísticas</a></li>
         <li><a href="#logros">🏆 Logros</a></li>
       </ul>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -595,7 +597,7 @@
           <div class="senal-card" data-id="20">
             <div class="senal-card-inner">
               <div class="senal-front">
-                <img class="sign-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/MUTCD_M4-8a.svg" alt="Desvío - ruta alterna"
+                <img class="sign-img" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/MUTCD_M4-8a.svg" alt="Desvío - ruta alterna"
                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="sign-fallback sign-info-fb">🔀</div>
                 <p class="tap-hint">👆 Toca para ver</p>
@@ -1944,10 +1946,10 @@
       <div class="footer-links">
         <h4>Emergencias</h4>
         <ul>
-          <li>🚨 Emergencias: <strong>118</strong></li>
-          <li>👮 Policía Nacional: <strong>101</strong></li>
-          <li>🚒 Bomberos: <strong>115</strong></li>
-          <li>🚑 Cruz Roja: <strong>128</strong></li>
+          <li>🚨 Emergencias: <a href="tel:118"><strong>118</strong></a></li>
+          <li>👮 Policía Nacional: <a href="tel:101"><strong>101</strong></a></li>
+          <li>🚒 Bomberos: <a href="tel:115"><strong>115</strong></a></li>
+          <li>🚑 Cruz Roja: <a href="tel:128"><strong>128</strong></a></li>
         </ul>
       </div>
     </div>
@@ -1965,7 +1967,7 @@
           <span class="qm-level" id="qmLevel">Básico</span>
           <span class="qm-counter" id="qmCounter">1 / 8</span>
         </div>
-        <div class="qm-timer" id="qmTimer">30</div>
+        <div class="qm-timer" id="qmTimer" aria-live="polite" aria-label="Tiempo restante">30</div>
         <button class="qm-close" id="qmClose">✕</button>
       </div>
       <div class="quiz-progress-bar">
@@ -2075,6 +2077,6 @@
     <button class="stab-btn"        data-target="logros"       role="tab" aria-selected="false"><span class="stab-icon">🏆</span><span class="stab-label">Logros</span></button>
   </nav>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>

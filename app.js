@@ -276,9 +276,7 @@ const PREGUNTAS = {
   ]
 };
 
-// Quiz completo = todos juntos (máx 30)
-PREGUNTAS.completo = [...PREGUNTAS.basico, ...PREGUNTAS.intermedio, ...PREGUNTAS.avanzado]
-  .sort(() => Math.random() - 0.5).slice(0, 30);
+// PREGUNTAS.completo se genera en startQuiz() para re-barajar en cada partida.
 
 // ════════════════════════════════════════════════════════════
 // ESCENARIOS REALES
@@ -367,10 +365,10 @@ const ESCENARIOS = [
       { text: 'Leo el mensaje rápido, solo son 2 segundos', correct: false },
       { text: 'Contesto la llamada con el altavoz mientras manejo', correct: false },
       { text: 'Me orillo en un lugar seguro, detengo el carro y reviso el celular', correct: true },
-      { text: 'Le pido al copiloto que revise el mensaje', correct: false }
+      { text: 'Le pido al copiloto que revise el mensaje', correct: true }
     ],
-    resultOk:  { icon: '✅', title: '¡Prioridad correcta!', text: 'Detenerte es lo único correcto. A 80 km/h, 2 segundos mirando el celular equivalen a recorrer 44 metros sin ver la vía. Ningún mensaje vale una vida.' },
-    resultBad: { icon: '🚨', title: '¡Decisión peligrosa!', text: 'Usar el celular al volante cuadruplica el riesgo de accidente. Si hay copiloto disponible, pedirle ayuda es válido — pero contestar tú mismo o leer solo es muy peligroso.' },
+    resultOk:  { icon: '✅', title: '¡Prioridad correcta!', text: 'Detenerte o pedirle al copiloto son las respuestas seguras. A 80 km/h, 2 segundos mirando el celular equivalen a 44 metros sin ver la vía. Ningún mensaje vale una vida.' },
+    resultBad: { icon: '🚨', title: '¡Decisión peligrosa!', text: 'Leer o contestar tú mismo al conducir cuadruplica el riesgo de accidente. Detente en un lugar seguro o, si tienes copiloto, pídele que lo revise.' },
     ley: '📖 Ley 431, Art. 87: El uso del celular sin manos libres al conducir es infracción grave. La distracción es la principal causa de accidentes en carretera.',
     pts: 20
   },
@@ -492,9 +490,13 @@ function guardarNombreModal() {
   const input = document.getElementById('inputNombre');
   const nombre = input ? input.value.trim() : '';
   registroSesion.nombre = nombre || 'Anónimo';
-  localStorage.setItem('vialnic_nombre', registroSesion.nombre);
+  // Solo guardamos en localStorage si el usuario escribió un nombre real,
+  // así la próxima visita volvemos a preguntarle si no lo hizo.
+  if (nombre) {
+    localStorage.setItem('vialnic_nombre', nombre);
+    toast(`👋 ¡Hola, ${nombre}! Tu progreso será registrado.`, 'success');
+  }
   cerrarModal('nombreModal');
-  if (nombre) toast(`👋 ¡Hola, ${nombre}! Tu progreso será registrado.`, 'success');
 }
 
 function registrarQuiz(cat, score, total, pct, xpGanado) {
@@ -735,6 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
   inicializarNombre();
   initNombreModal();
   initSectionTabs();
+  initSideNavScrollspy();
 });
 
 // ── Modal de Nombre ────────────────────────────────────────
@@ -745,6 +748,7 @@ function initNombreModal() {
 
   if (btnGuardar) btnGuardar.addEventListener('click', guardarNombreModal);
   if (btnSaltar)  btnSaltar.addEventListener('click', () => {
+    // No guardamos en localStorage al saltar: el modal volverá a mostrarse en la próxima visita
     registroSesion.nombre = 'Anónimo';
     cerrarModal('nombreModal');
   });
@@ -810,8 +814,9 @@ function initNavbar() {
   const nav    = document.getElementById('globalNav');
 
   toggle.addEventListener('click', () => {
-    links.classList.toggle('open');
-    toggle.classList.toggle('active');
+    const isOpen = links.classList.toggle('open');
+    toggle.classList.toggle('active', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
   });
   links.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -845,12 +850,24 @@ function initNavbar() {
 
 // ── Hero: Selección de perfil ──────────────────────────────
 function initHero() {
-  // Setea --road-w una sola vez para que el keyframe use un valor fijo (no calc en cada frame)
-  const road = document.querySelector('.hero-bg-road');
-  if (road) {
+  // Setea --road-w para que el keyframe carRide use un valor fijo al ancho real de la pantalla.
+  // Se recalcula también en resize para evitar carros "teletransportándose" al cambiar tamaño.
+  function setRoadWidth() {
+    const road = document.querySelector('.hero-bg-road');
+    if (!road) return;
     const w = road.offsetWidth;
     document.documentElement.style.setProperty('--road-w', (w + 150) + 'px');
+
+    // Forzar reinicio de animaciones de los carros para que tomen el nuevo valor
+    document.querySelectorAll('.car-track').forEach(el => {
+      el.style.animation = 'none';
+      // Forzar reflow (lee el layout para que el browser aplique el cambio)
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
   }
+  setRoadWidth();
+  window.addEventListener('resize', setRoadWidth, { passive: true });
 
   const cards = document.querySelectorAll('.profile-card');
   const cta   = document.getElementById('heroCta');
@@ -1022,6 +1039,7 @@ window.startQuiz = function(cat) {
     totalPts: preguntas.reduce((a, p) => a + p.pts, 0),
     earned: 0,
     answered: false,
+    finished: false,
     timer: null
   };
 
@@ -1106,6 +1124,9 @@ function responderQuiz(selIdx, p) {
 }
 
 document.getElementById('quizNextBtn').addEventListener('click', () => {
+  // Guardia: si ya estamos en la pantalla de resultados el .onclick del botón
+  // cierra el modal; este listener no debe volver a ejecutar mostrarResultado.
+  if (quizState.finished) return;
   if (quizState.idx < quizState.preguntas.length - 1) {
     quizState.idx++;
     renderPregunta();
@@ -1162,6 +1183,7 @@ function mostrarResultado() {
   `;
   document.getElementById('quizProgressFill').style.width = '100%';
   document.getElementById('quizExplanation').style.display = 'none';
+  quizState.finished = true;   // Evita que el addEventListener superior dispare mostrarResultado() de nuevo
   document.getElementById('quizNextBtn').textContent = '✕ Cerrar';
   document.getElementById('quizNextBtn').style.display = 'block';
   document.getElementById('quizNextBtn').onclick = () => cerrarModal('quizModal');
@@ -1443,7 +1465,12 @@ function cerrarModal(id) {
 // Close on overlay click
 ['quizModal','escModal','certModal','logroModal'].forEach(id => {
   const el = document.getElementById(id);
-  if (el) el.addEventListener('click', e => { if (e.target === el) cerrarModal(id); });
+  if (el) el.addEventListener('click', e => {
+    if (e.target === el) {
+      if (id === 'quizModal') clearInterval(quizState.timer); // Evita que el timer siga corriendo en background
+      cerrarModal(id);
+    }
+  });
 });
 
 // Nombre modal: no cierra con click fuera (es obligatorio rellenarlo)
@@ -1487,19 +1514,8 @@ function lanzarConfetti() {
 }
 
 // ── Intersection Observer (estadísticas) ──────────────────
-// Also for logros section
-const logrosObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      document.querySelectorAll('.logro-item').forEach((item, i) => {
-        setTimeout(() => item.style.opacity = '1', i * 60);
-      });
-      logrosObs.disconnect();
-    }
-  });
-}, { threshold: 0.1 });
-const logrosSection = document.getElementById('logros');
-if (logrosSection) logrosObs.observe(logrosSection);
+// Nota: La animación de logros se gestiona desde activateTab() para que
+// funcione correctamente con el sistema de tabs. El observer anterior fue eliminado.
 
 // ── Utilities ──────────────────────────────────────────────
 function cap(str) {
@@ -1552,12 +1568,8 @@ function initSectionTabs() {
   const heroBtn = document.getElementById('heroStartBtn');
   if (heroBtn) {
     heroBtn.addEventListener('click', () => {
+      // activateTab ya hace el scroll correcto — no añadir scrollTo extra
       activateTab('aprende', true);
-      const tabs = document.getElementById('sectionTabs');
-      if (tabs) {
-        const navH = getNavHeight();
-        window.scrollTo({ top: tabs.offsetTop - navH, behavior: 'smooth' });
-      }
     });
   }
 
@@ -1592,6 +1604,8 @@ function initSectionTabs() {
   });
 }
 
+// activateTab está definida a nivel de módulo para que initModulos() y otros
+// contextos puedan llamarla sin depender del scope de initSectionTabs().
 function activateTab(targetId, animate) {
   const tabBtns = document.querySelectorAll('.stab-btn');
 
