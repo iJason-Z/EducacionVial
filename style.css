@@ -30,8 +30,8 @@
 
 /* ── Reset & Base ──────────────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { font-size: 16px; overflow-x: hidden; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; }
+html { font-size: 16px; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
 a { text-decoration: none; color: inherit; }
 img { display: block; max-width: 100%; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
@@ -304,22 +304,19 @@ ul { list-style: none; }
 }
 @keyframes roadMove { from { left: -100%; } to { left: 0; } }
 
-.car-track {
-  position: absolute;
-  bottom: 16px;
-  left: 0;
-  animation: carRide linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
+/* ── Animación de carros ──────────────────────────────────
+   Estructura igual al backup: .car con position:absolute anima
+   directamente con la propiedad `left`, sin capa .car-track.
+   El shorthand `animation: carRide linear infinite` funciona
+   porque cada .car-X sobreescribe animation-duration DESPUÉS,
+   lo cual es la cascada estándar de CSS (source order).
+*/
 .car {
-  display: block;
+  position: absolute;
   font-size: 2rem;
+  bottom: 16px;
+  animation: carRide linear infinite;
   transform: scaleX(-1);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 /*
@@ -335,34 +332,26 @@ ul { list-style: none; }
 */
 
 /* ── Carril A (rápido, superior) ───────────────────────── */
-/* 3 vehículos, duración ~5s → separación ~1.67s */
-.car-a { bottom: 80px; animation-duration: 5s;  animation-delay: 0s;      }
-.car-e { bottom: 80px; animation-duration: 5s;  animation-delay: -1.67s;  }
-.car-f { bottom: 78px; animation-duration: 5s;  animation-delay: -3.33s;  }
-.car-f .car { font-size: 1.8rem; filter: drop-shadow(0 0 5px #1155ff); } /* patrulla: brillo azul */
+.car-a { bottom: 80px; font-size: 2rem;   animation-duration: 5s;  animation-delay: 0s;      }
+.car-e { bottom: 80px; font-size: 2rem;   animation-duration: 5s;  animation-delay: -1.67s;  }
+.car-f { bottom: 78px; font-size: 1.8rem; animation-duration: 5s;  animation-delay: -3.33s;
+         filter: drop-shadow(0 0 5px #1155ff); }
 
 /* ── Carril B (medio, motos/bici) ──────────────────────── */
-/* 3 vehículos, duración ~4s → separación ~1.33s */
-.car-c { bottom: 42px; animation-duration: 4s;  animation-delay: 0s;      }
-.car-g { bottom: 44px; animation-duration: 4s;  animation-delay: -1.33s;  }
-.car-g .car { font-size: 1.9rem; filter: drop-shadow(0 0 5px #ff3333); } /* ambulancia: brillo rojo */
-.car-i { bottom: 40px; animation-duration: 4s;  animation-delay: -2.67s;  }
-.car-i .car { font-size: 1.3rem; }
+.car-c { bottom: 42px; font-size: 1.5rem; animation-duration: 4s;  animation-delay: 0s;      }
+.car-g { bottom: 44px; font-size: 1.9rem; animation-duration: 4s;  animation-delay: -1.33s;
+         filter: drop-shadow(0 0 5px #ff3333); }
+.car-i { bottom: 40px; font-size: 1.3rem; animation-duration: 4s;  animation-delay: -2.67s;  }
 
 /* ── Carril C (lento, inferior) ────────────────────────── */
-/* 4 vehículos, duración ~11s → separación ~2.75s */
-.car-b { bottom:  8px; animation-duration: 11s; animation-delay: 0s;      }
-.car-b .car { font-size: 1.6rem; }
-.car-d { bottom:  6px; animation-duration: 11s; animation-delay: -2.75s;  }
-.car-d .car { font-size: 2.4rem; }
-.car-h { bottom:  7px; animation-duration: 11s; animation-delay: -5.5s;   }
-.car-j { bottom:  9px; animation-duration: 11s; animation-delay: -8.25s;  }
-.car-j .car { font-size: 1.9rem; }
+.car-b { bottom:  8px; font-size: 1.6rem; animation-duration: 11s; animation-delay: 0s;      }
+.car-d { bottom:  6px; font-size: 2.4rem; animation-duration: 11s; animation-delay: -2.75s;  }
+.car-h { bottom:  7px; font-size: 2rem;   animation-duration: 11s; animation-delay: -5.5s;   }
+.car-j { bottom:  9px; font-size: 1.9rem; animation-duration: 11s; animation-delay: -8.25s;  }
 
 @keyframes carRide {
-  from { transform: translateX(-150px); }
-  to   { transform: translateX(var(--road-w, calc(100vw + 200px))); }
-  /* Fallback calc(100vw + 200px) cubre cualquier pantalla si JS no fijó --road-w */
+  from { left: -80px; }
+  to   { left: calc(100% + 80px); }
 }
 
 .semaforo-hero {
@@ -2405,9 +2394,11 @@ ul { list-style: none; }
   will-change: transform;
 }
 
-/* Reduce motion for accessibility */
+/* Reduce motion for accessibility — excluye los carros del hero */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *:not(.car):not(.car-a):not(.car-b):not(.car-c):not(.car-d):not(.car-e):not(.car-f):not(.car-g):not(.car-h):not(.car-i):not(.car-j),
+  *:not(.car):not(.car-a):not(.car-b):not(.car-c):not(.car-d):not(.car-e):not(.car-f):not(.car-g):not(.car-h):not(.car-i):not(.car-j)::before,
+  *:not(.car):not(.car-a):not(.car-b):not(.car-c):not(.car-d):not(.car-e):not(.car-f):not(.car-g):not(.car-h):not(.car-i):not(.car-j)::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }

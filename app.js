@@ -850,24 +850,9 @@ function initNavbar() {
 
 // ── Hero: Selección de perfil ──────────────────────────────
 function initHero() {
-  // Setea --road-w para que el keyframe carRide use un valor fijo al ancho real de la pantalla.
-  // Se recalcula también en resize para evitar carros "teletransportándose" al cambiar tamaño.
-  function setRoadWidth() {
-    const road = document.querySelector('.hero-bg-road');
-    if (!road) return;
-    const w = road.offsetWidth;
-    document.documentElement.style.setProperty('--road-w', (w + 150) + 'px');
-
-    // Forzar reinicio de animaciones de los carros para que tomen el nuevo valor
-    document.querySelectorAll('.car-track').forEach(el => {
-      el.style.animation = 'none';
-      // Forzar reflow (lee el layout para que el browser aplique el cambio)
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
-  }
-  setRoadWidth();
-  window.addEventListener('resize', setRoadWidth, { passive: true });
+  // La animación carRide usa translateX con valor fijo (3200px) en CSS.
+  // hero-bg-road tiene overflow:hidden que recorta los carros fuera de pantalla.
+  // No se necesita calcular --road-w ni reiniciar animaciones en JS.
 
   const cards = document.querySelectorAll('.profile-card');
   const cta   = document.getElementById('heroCta');
